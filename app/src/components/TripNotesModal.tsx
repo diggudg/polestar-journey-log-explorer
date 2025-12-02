@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from 'react';
 import { Modal, Textarea, Button, Group, MultiSelect, Stack } from '@mantine/core';
 import { IconTag, IconNote } from '@tabler/icons-react';

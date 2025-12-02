@@ -2,7 +2,7 @@
 
 First off, thank you for considering contributing to this project! 🎉
 
-**Kinn Coelho Juliao** welcomes contributions from the community. This document provides guidelines to help you contribute effectively.
+**Digvijay Singh** welcomes contributions from the community. This document provides guidelines to help you contribute effectively.
 
 ## 📋 Table of Contents
 
@@ -447,7 +447,9 @@ Thank you for contributing! 🙏
 
 ## 📞 Contact
 
-**Maintainer**: Kinn Coelho Juliao
+**Maintainer**: Digvijay Singh <diggudg@gmail.com>
+
+Original project created by Kinn Coelho Juliao <kinncj@gmail.com> — thanks to the original author for the foundation of this project.
 
 For questions or clarifications, feel free to:
 - Open an issue

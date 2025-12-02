@@ -1,6 +1,7 @@
 # Development Guide - Polestar Journey Log Explorer
 
-**Author**: Kinn Coelho Juliao  
+**Author**: Digvijay Singh (maintainer)  
+Original work by Kinn Coelho Juliao <kinncj@gmail.com> — many thanks to the original author for creating and maintaining this project.
 **Date**: November 21, 2025
 
 ## Getting Started with Development
@@ -21,7 +22,7 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/polestar-oss/polestar-journey-log-explorer.git
+git clone https://github.com/diggudg/polestar-journey-log-explorer.git
 cd polestar-journey-log-explorer
 ```
 
@@ -535,5 +536,5 @@ This is handled in `MapView.jsx` with custom icon configuration.
 
 **Happy coding!**
 
-**Kinn Coelho Juliao**  
-Maintainer & Original Author
+**Digvijay Singh** <diggudg@gmail.com>  
+Maintainer (fork). Original project by Kinn Coelho Juliao <kinncj@gmail.com> — many thanks to the original author.

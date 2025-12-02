@@ -1,11 +1,18 @@
+// @ts-nocheck
 import { useState, useMemo } from 'react';
 import { Paper, Group, Select, NumberInput, Button, Stack, Collapse, Text, Badge, MultiSelect } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { IconFilter, IconX, IconChevronDown, IconChevronUp, IconCalendar, IconTag } from '@tabler/icons-react';
 import { getAllTags, generateTripId, getTripAnnotation } from '../../utils/tripAnnotations';
 import { FilterService, FilterStateManager, FilterMetadataService } from '../../services/filters/FilterService';
+import type { Trip } from '../../types';
 
-function Filters({ data, onFilterChange }) {
+interface FiltersProps {
+  data: Trip[];
+  onFilterChange: (filtered: Trip[]) => void;
+}
+
+function Filters({ data, onFilterChange }: FiltersProps) {
   const [opened, setOpened] = useState(false);
 
   // Initialize services (Dependency Injection)

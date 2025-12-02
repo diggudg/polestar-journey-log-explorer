@@ -1,6 +1,7 @@
 # User Guide - Polestar Journey Log Explorer
 
-**Author**: Kinn Coelho Juliao  
+**Author / Maintainer**: Digvijay Singh <diggudg@gmail.com>  
+Original content by Kinn Coelho Juliao <kinncj@gmail.com> — many thanks for the original work.
 **Date**: November 21, 2025
 
 ## Introduction
@@ -391,7 +392,7 @@ Visit the GitHub repository to get involved.
 ## About
 
 **Polestar Journey Log Explorer**  
-Built by Kinn Coelho Juliao
+Built by Digvijay Singh <diggudg@gmail.com>. Original work by Kinn Coelho Juliao <kinncj@gmail.com>.
 
 A tool for Polestar owners and EV enthusiasts to better understand their electric vehicle usage and efficiency.
 

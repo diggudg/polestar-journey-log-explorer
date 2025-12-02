@@ -43,6 +43,8 @@ export class OSMHumanitarianStrategy extends TileLayerStrategy {
  * Single Responsibility: Only responsible for creating tile layers
  */
 export class TileLayerFactory {
+    strategies: Record<string, TileLayerStrategy>;
+    
     constructor() {
         this.strategies = {
             'osm': new OSMStandardStrategy(),

@@ -51,6 +51,8 @@ export class StartMarkerStrategy extends MarkerStrategy {
  * Concrete Strategy: Creates end markers (efficiency-colored pins)
  */
 export class EndMarkerStrategy extends MarkerStrategy {
+    colorCalculator: any;
+    
     // Sanitizer for individual RGB channel values
     static sanitizeRgbComponent(value) {
         const num = Number(value);
@@ -123,6 +125,8 @@ export class EndMarkerStrategy extends MarkerStrategy {
  * Context: Uses marker strategies to create appropriate markers
  */
 export class MarkerFactory {
+    strategies: Record<string, MarkerStrategy>;
+    
     constructor(colorCalculator) {
         this.strategies = {
             start: new StartMarkerStrategy(),

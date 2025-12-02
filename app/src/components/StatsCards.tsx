@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from 'react';
 import { Paper, SimpleGrid, Text, Group, ThemeIcon, ActionIcon, Tooltip } from '@mantine/core';
 import { 

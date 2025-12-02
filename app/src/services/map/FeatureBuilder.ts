@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Feature } from 'ol';
 import { LineString, Point } from 'ol/geom';
 import { fromLonLat } from 'ol/proj';

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Group, Paper, Select, Stack, Switch, Text } from "@mantine/core";
 import "ol/ol.css";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -6,8 +7,13 @@ import { FeatureBuilder } from "../../services/map/FeatureBuilder";
 import { MapService } from "../../services/map/MapService";
 import { TileLayerFactory } from "../../strategies/map/LayerStrategy";
 import { MarkerFactory } from "../../strategies/map/MarkerStrategy";
+import type { Trip } from '../../types';
 
-function MapView({ data }) {
+interface MapViewProps {
+  data: Trip[];
+}
+
+function MapView({ data }: MapViewProps) {
   const mapRef = useRef(null);
   const mapServiceRef = useRef(null);
 

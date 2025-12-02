@@ -3,7 +3,8 @@
 ![Polestar Journey Log Explorer](../assets/black_transparent.png)
 
 **Polestar Journey Log Explorer Documentation**  
-**Author**: Kinn Coelho Juliao <kinncj@gmail.com>  
+**Author / Maintainer**: Digvijay Singh <diggudg@gmail.com>  
+Original content by Kinn Coelho Juliao <kinncj@gmail.com> — many thanks to the original author.
 **License**: MIT
 
 Welcome to the comprehensive documentation for the Polestar Journey Log Explorer! This directory contains guides for users, developers, and contributors.
@@ -26,7 +27,9 @@ Welcome to the comprehensive documentation for the Polestar Journey Log Explorer
 ## 👥 For Users
 
 ### [📘 User Guide](./USER_GUIDE.md)
+
 Complete guide for end users covering:
+
 - Uploading and analyzing journey data
 - Understanding dashboard features and statistics
 - Using interactive charts and maps
@@ -37,7 +40,9 @@ Complete guide for end users covering:
 - Troubleshooting common issues
 
 ### [⚡ Quick Start Guide](./QUICKSTART.md)
+
 Get started in minutes:
+
 - Live demo access
 - File upload instructions
 - Basic feature overview
@@ -48,7 +53,9 @@ Get started in minutes:
 ## 🛠️ For Developers
 
 ### [💻 Development Guide](./DEVELOPMENT.md)
+
 Complete developer setup and guidelines:
+
 - Environment setup and prerequisites
 - Project structure and file organization
 - Component development guidelines
@@ -58,7 +65,9 @@ Complete developer setup and guidelines:
 - Performance optimization tips
 
 ### [🏗️ Architecture Documentation](./ARCHITECTURE.md)
+
 Deep dive into system design:
+
 - Technology stack overview
 - Component architecture and patterns
 - Data flow and state management
@@ -68,7 +77,9 @@ Deep dive into system design:
 - Future enhancement roadmap
 
 ### [📋 Project Summary](./PROJECT_SUMMARY.md)
+
 High-level project overview:
+
 - Project goals and objectives
 - Feature list and capabilities
 - Technical decisions and rationale
@@ -79,7 +90,9 @@ High-level project overview:
 ## 🤝 For Contributors
 
 ### [🔧 Contributing Guide](./CONTRIBUTING.md)
+
 How to contribute to the project:
+
 - Code of conduct
 - Development workflow
 - Pull request process
@@ -94,11 +107,13 @@ How to contribute to the project:
 Interactive Mermaid diagrams visualizing system components:
 
 ### System Design
+
 - **[System Architecture](./diagrams/system-architecture.md)** - High-level architecture overview
 - **[Component Hierarchy](./diagrams/component-hierarchy.md)** - React component tree structure
 - **[Data Model](./diagrams/data-model.md)** - Data structures and transformations
 
 ### Process Flows
+
 - **[Data Flow](./diagrams/data-flow.md)** - How data flows through the application
 - **[User Journey](./diagrams/user-journey.md)** - Typical user interaction patterns
 - **[Deployment Process](./diagrams/deployment-process.md)** - CI/CD and deployment workflow
@@ -108,19 +123,22 @@ Interactive Mermaid diagrams visualizing system components:
 ## 🚀 Quick Start Guides
 
 ### I'm a New User
+
 1. Visit the [live demo](https://kinncj.github.io/polestar-journey-log-explorer/)
 2. Read the [Quick Start Guide](./QUICKSTART.md)
 3. Upload your journey log and explore!
 
 ### I'm a Developer
+
 1. Clone the repository
 2. Follow the [Development Guide](./DEVELOPMENT.md) setup instructions
 3. Review the [Architecture Documentation](./ARCHITECTURE.md)
 4. Check the [visual diagrams](./diagrams/) for reference
 
 ### I Want to Contribute
+
 1. Read the [Contributing Guide](./CONTRIBUTING.md)
-2. Browse [open issues](https://github.com/polestar-oss/polestar-journey-log-explorer/issues)
+2. Browse [open issues](https://github.com/diggudg/polestar-journey-log-explorer/issues)
 3. Fork, develop, and submit a pull request!
 
 ---
@@ -128,18 +146,21 @@ Interactive Mermaid diagrams visualizing system components:
 ## 🎯 Key Features Documented
 
 ### Data Management
+
 - **File Upload**: CSV and XLSX support with drag-and-drop
 - **Client-Side Processing**: All data stays on your device
 - **Data Validation**: Automatic format detection and error handling
 - **Export Functionality**: Download filtered data as CSV
 
 ### Visualizations
+
 - **Statistics Dashboard**: 11+ key metrics including carbon savings
 - **Interactive Charts**: Distance, consumption, and efficiency trends
 - **Map View**: Geographic trip visualization with route linking
 - **Data Table**: Searchable, sortable, filterable trip list
 
 ### Analysis Tools
+
 - **Cost Calculator**: Estimate charging costs with global electricity rates
 - **Carbon Savings**: Compare emissions vs ICE vehicles
 - **Efficiency Tracking**: Monitor and optimize consumption patterns
@@ -147,6 +168,7 @@ Interactive Mermaid diagrams visualizing system components:
 - **Advanced Filtering**: Filter by date, distance, efficiency, SOC, tags
 
 ### User Experience
+
 - **Dark/Light Theme**: Toggle for comfortable viewing
 - **Responsive Design**: Works on desktop, tablet, and mobile
 - **Date Range Picker**: Calendar-based date filtering
@@ -157,6 +179,7 @@ Interactive Mermaid diagrams visualizing system components:
 ## 🔧 Technical Overview
 
 ### Technology Stack
+
 ```
 Frontend Framework:    React 18.3.1
 Build Tool:           Vite 5.4.9
@@ -169,6 +192,7 @@ Icons:                Tabler Icons 3.19.0
 ```
 
 ### Architecture Highlights
+
 - **100% Client-Side**: No backend, all processing in browser
 - **Privacy First**: Data never leaves your device
 - **Component-Based**: Modular React architecture
@@ -176,6 +200,7 @@ Icons:                Tabler Icons 3.19.0
 - **Responsive**: Mobile-first design approach
 
 ### Deployment
+
 - **Hosting**: GitHub Pages
 - **CI/CD**: GitHub Actions automated deployment
 - **Static Generation**: Pre-built assets for fast loading
@@ -185,6 +210,7 @@ Icons:                Tabler Icons 3.19.0
 ## 📖 Documentation Standards
 
 All documentation follows these principles:
+
 - **Clarity**: Clear, concise language
 - **Completeness**: Comprehensive coverage of topics
 - **Currency**: Regularly updated with new features
@@ -196,11 +222,13 @@ All documentation follows these principles:
 ## 📞 Support & Community
 
 ### Get Help
-- **Issues**: [Report bugs or request features](https://github.com/polestar-oss/polestar-journey-log-explorer/issues)
-- **Discussions**: [Ask questions and share ideas](https://github.com/polestar-oss/polestar-journey-log-explorer/discussions)
+
+-- **Issues**: [Report bugs or request features](https://github.com/diggudg/polestar-journey-log-explorer/issues)
+-- **Discussions**: [Ask questions and share ideas](https://github.com/diggudg/polestar-journey-log-explorer/discussions)
 
 ### Stay Updated
-- **Repository**: [github.com/polestar-oss/polestar-journey-log-explorer](https://github.com/polestar-oss/polestar-journey-log-explorer)
+
+- **Repository**: [github.com/diggudg/polestar-journey-log-explorer](https://github.com/diggudg/polestar-journey-log-explorer)
 - **Live Demo**: [kinncj.github.io/polestar-journey-log-explorer](https://kinncj.github.io/polestar-journey-log-explorer/)
 
 ---
@@ -217,7 +245,9 @@ This tool is created by the community for analyzing journey log data exported fr
 
 This project is licensed under the MIT License. See the [LICENSE](../LICENSE) file for details.
 
-**Copyright (c) 2025 Kinn Coelho Juliao <kinncj@gmail.com>**
+**Copyright (c) 2025 Digvijay Singh <diggudg@gmail.com>**
+
+Original project by Kinn Coelho Juliao <kinncj@gmail.com> — credit to the original author for the foundation of this project.
 
 ---
 
@@ -273,7 +303,7 @@ For questions or suggestions about the documentation:
 
 - Open an issue on GitHub
 - Submit a pull request with improvements
-- Contact the maintainer: Kinn Coelho Juliao
+- Contact the maintainer: Digvijay Singh <diggudg@gmail.com>
 
 ## 📄 License
 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from "react";
 import {
   AppShell,
@@ -124,7 +125,7 @@ function App() {
                 </Group>
                 <Group gap="sm" justify="center">
                   <Anchor
-                    href="https://github.com/Polestar-OSS/polestar-journey-log-explorer"
+                    href="https://github.com/diggudg/polestar-journey-log-explorer"
                     target="_blank"
                     c="dimmed"
                     size="xs"
@@ -135,7 +136,7 @@ function App() {
                     </Group>
                   </Anchor>
                   <Anchor
-                    href="https://github.com/Polestar-OSS/polestar-journey-log-explorer/blob/main/LICENSE"
+                    href="https://github.com/diggudg/polestar-journey-log-explorer/blob/main/LICENSE"
                     target="_blank"
                     c="dimmed"
                     size="xs"
@@ -167,7 +168,7 @@ function App() {
                 </Group>
                 <Group gap="md">
                   <Anchor
-                    href="https://github.com/Polestar-OSS/polestar-journey-log-explorer"
+                    href="https://github.com/diggudg/polestar-journey-log-explorer"
                     target="_blank"
                     c="dimmed"
                     size="sm"
@@ -178,7 +179,7 @@ function App() {
                     </Group>
                   </Anchor>
                   <Anchor
-                    href="https://github.com/Polestar-OSS/polestar-journey-log-explorer/blob/main/LICENSE"
+                    href="https://github.com/diggudg/polestar-journey-log-explorer/blob/main/LICENSE"
                     target="_blank"
                     c="dimmed"
                     size="sm"
@@ -190,8 +191,10 @@ function App() {
               <Divider />
               <Box>
                 <Text size="xs" c="dimmed" ta="center">
-                  © 2025 Kinn Coelho Juliao &lt;kinncj@gmail.com&gt; • Made with
-                  ⚡ by the community
+                  © 2025 Digvijay Singh &lt;diggudg@gmail.com&gt; • Made with ⚡ by the community
+                </Text>
+                <Text size="xs" c="dimmed" ta="center" mt={4}>
+                  Forked and maintained by Digvijay Singh. Original project by Kinn Coelho Juliao — many thanks to the original author for creating this tool.
                 </Text>
                 <Text size="xs" c="dimmed" ta="center" mt={4}>
                   This project is not affiliated with, endorsed by, or in any

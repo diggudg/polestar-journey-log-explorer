@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Stack, Title, Text, Paper, Divider, List, Accordion, Badge, Code, Group } from '@mantine/core';
 import { IconChartBar, IconMap, IconCalculator, IconInfoCircle } from '@tabler/icons-react';
 

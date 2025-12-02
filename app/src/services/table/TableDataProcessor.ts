@@ -94,17 +94,17 @@ export class TableDataProcessor {
      * @param {Object} options - Filter and sort options
      * @returns {Array} Processed data
      */
-    processData(data, options = {}) {
-        let processed = data;
+    processTableData(data, options: any = {}) {
+        let processed = [...data];
 
         // Apply search filter
-        if (options.search) {
-            processed = this.filterData(processed, options.search, options.searchFields);
+        if (options.searchQuery) {
+            processed = this.filterData(processed, options.searchQuery, options.searchFields || []);
         }
 
         // Apply sorting
         if (options.sortBy) {
-            processed = this.sortData(processed, options.sortBy, options.sortOrder);
+            processed = this.sortData(processed, options.sortBy, options.sortOrder || 'asc');
         }
 
         return processed;

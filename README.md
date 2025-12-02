@@ -2,9 +2,9 @@
 
 ![Polestar Journey Log Explorer](./assets/white_transparent.png)
 
-[![Deploy to GitHub Pages](https://github.com/Polestar-OSS/polestar-journey-log-explorer/actions/workflows/deploy.yml/badge.svg)](https://github.com/Polestar-OSS/polestar-journey-log-explorer/actions/workflows/deploy.yml)
-[![Dependabot](https://github.com/Polestar-OSS/polestar-journey-log-explorer/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/Polestar-OSS/polestar-journey-log-explorer/actions/workflows/dependabot/dependabot-updates)
-[![CodeQL](https://github.com/Polestar-OSS/polestar-journey-log-explorer/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Polestar-OSS/polestar-journey-log-explorer/actions/workflows/github-code-scanning/codeql)
+[![Deploy to GitHub Pages](https://github.com/diggudg/polestar-journey-log-explorer/actions/workflows/deploy.yml/badge.svg)](https://github.com/diggudg/polestar-journey-log-explorer/actions/workflows/deploy.yml)
+[![Dependabot](https://github.com/diggudg/polestar-journey-log-explorer/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/diggudg/polestar-journey-log-explorer/actions/workflows/dependabot/dependabot-updates)
+[![CodeQL](https://github.com/diggudg/polestar-journey-log-explorer/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/diggudg/polestar-journey-log-explorer/actions/workflows/github-code-scanning/codeql)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 An interactive web-based dashboard for analyzing your Polestar journey log data. Upload your CSV/Excel files and explore comprehensive statistics, visualizations, and insights about your electric vehicle trips—all processed locally in your browser with complete privacy.
@@ -12,24 +12,28 @@ An interactive web-based dashboard for analyzing your Polestar journey log data.
 ## ✨ Features
 
 ### 📊 Data Analysis & Visualization
+
 - **Interactive Charts** - Distance, consumption, and efficiency trends over time
 - **Statistics Dashboard** - 11+ key metrics including carbon savings and cost estimates
 - **Map View** - Routes plotted on interactive maps with trip linking
 - **Data Table** - Search, sort, filter, and export your trip data
 
 ### 🎨 User Experience
+
 - **Dark/Light Theme** - Toggle between themes for comfortable viewing
 - **Responsive Design** - Works seamlessly on desktop, tablet, and mobile
 - **Date Range Filtering** - Filter trips by date, distance, efficiency, SOC, and more
 - **Trip Annotations** - Add custom notes and tags to organize your trips
 
 ### 🔋 EV-Specific Features
+
 - **Carbon Savings Calculator** - See your environmental impact vs ICE vehicles
 - **Cost Calculator** - Estimate charging costs with global electricity rates
 - **Efficiency Analysis** - Track consumption patterns and optimize driving
 - **SOC Tracking** - Monitor battery state of charge across trips
 
 ### 🔒 Privacy First
+
 - **100% Client-Side** - All data processing happens in your browser
 - **No Backend** - Your data never leaves your device
 - **No Tracking** - No analytics or third-party services
@@ -38,7 +42,7 @@ An interactive web-based dashboard for analyzing your Polestar journey log data.
 
 ### Try It Online
 
-Visit the live demo: **[https://polestar-oss.github.io/polestar-journey-log-explorer/](https://polestar-oss.github.io/polestar-journey-log-explorer/)**
+Visit the live demo: **[https://diggudg.github.io/polestar-journey-log-explorer/](https://diggudg.github.io/polestar-journey-log-explorer/)**
 
 1. Download your journey log from your Polestar app
 2. Visit the website and upload your CSV/XLSX file
@@ -48,7 +52,7 @@ Visit the live demo: **[https://polestar-oss.github.io/polestar-journey-log-expl
 
 ```bash
 # Clone the repository
-git clone https://github.com/polestar-oss/polestar-journey-log-explorer.git
+git clone https://github.com/diggudg/polestar-journey-log-explorer.git
 cd polestar-journey-log-explorer/app
 
 # Install dependencies
@@ -92,6 +96,7 @@ Detailed documentation is available in the [`docs/`](./docs/) directory:
 ## 📦 Data Format
 
 The application supports CSV and XLSX files with these columns:
+
 - Start/End Date & Time
 - Start/End Address
 - Distance (km)
@@ -110,7 +115,9 @@ Contributions are welcome! Please read our [Contributing Guide](./docs/CONTRIBUT
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
-Copyright (c) 2025 Kinn Coelho Juliao <kinncj@gmail.com>
+Copyright (c) 2025 Digvijay Singh <diggudg@gmail.com>
+
+This fork is maintained by Digvijay Singh <diggudg@gmail.com>. Original project created by Kinn Coelho Juliao <kinncj@gmail.com> — many thanks to the original author for their work.
 
 ## 🙏 Acknowledgments
 
@@ -126,8 +133,8 @@ This tool is created by the community for analyzing journey log data exported fr
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/polestar-oss/polestar-journey-log-explorer/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/polestar-oss/polestar-journey-log-explorer/discussions)
+- **Issues**: [GitHub Issues](https://github.com/diggudg/polestar-journey-log-explorer/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/diggudg/polestar-journey-log-explorer/discussions)
 
 ---
 

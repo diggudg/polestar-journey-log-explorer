@@ -2,8 +2,13 @@ import { useMemo, useState } from 'react';
 import { Paper, Text, SimpleGrid, Stack, Group, ThemeIcon, Table, Badge, RingProgress, Center, ActionIcon, Tooltip, Loader } from '@mantine/core';
 import { IconBolt, IconMapPin, IconRoute, IconAlertTriangle, IconChargingPile, IconSearch } from '@tabler/icons-react';
 import { ChartDataProcessor } from '../../services/charts/ChartDataProcessor';
+import type { Trip } from '../../types';
 
-function AnalyticsView({ data }) {
+interface AnalyticsViewProps {
+  data: Trip[];
+}
+
+function AnalyticsView({ data }: AnalyticsViewProps) {
     const processor = useMemo(() => new ChartDataProcessor(), []);
     const [chargerNames, setChargerNames] = useState({});
     const [loadingNames, setLoadingNames] = useState({});

@@ -3,7 +3,8 @@
 **Polestar Journey Log Explorer**  
 **Version**: 1.0.0  
 **Date**: November 21, 2025  
-**Author**: Kinn Coelho Juliao
+**Author / Maintainer**: Digvijay Singh <diggudg@gmail.com>
+Original project authored by Kinn Coelho Juliao <kinncj@gmail.com> — many thanks to the original author for their work.
 
 ## 📋 Project Overview
 
@@ -239,7 +240,7 @@ npm run deploy
 ### For Developers
 ```bash
 # Clone
-git clone https://github.com/polestar-oss/polestar-journey-log-explorer.git
+git clone https://github.com/diggudg/polestar-journey-log-explorer.git
 
 # Install
 cd polestar-journey-log-explorer/app
@@ -271,11 +272,11 @@ See DEVELOPMENT.md for detailed guidelines.
 
 Free to use, modify, and distribute.
 
-## 👤 Author
+## 👤 Author / Maintainer
 
-**Kinn Coelho Juliao**
+**Digvijay Singh** <diggudg@gmail.com>
 
-Built with ❤️ for the EV community
+Original project by Kinn Coelho Juliao <kinncj@gmail.com> — many thanks to the original author.
 
 ## 🎯 Project Goals Achieved
 
@@ -310,7 +311,7 @@ All requested features have been implemented:
 - ✅ App in `app/` folder
 - ✅ Documentation in `docs/` folder
 - ✅ Mermaid diagrams created
-- ✅ Written as Kinn Coelho Juliao
+- ✅ Originally written by Kinn Coelho Juliao
 
 Ready for:
 - Installation and testing

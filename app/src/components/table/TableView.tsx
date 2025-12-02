@@ -4,8 +4,13 @@ import { useMemo, useState } from 'react';
 import { TableDataProcessor, TableRowFormatter } from '../../services/table/TableDataProcessor';
 import { generateTripId, getTripAnnotation } from '../../utils/tripAnnotations';
 import TripNotesModal from '../TripNotesModal';
+import type { Trip } from '../../types';
 
-function TableView({ data }) {
+interface TableViewProps {
+  data: Trip[];
+}
+
+function TableView({ data }: TableViewProps) {
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState('startDate');
   const [sortOrder, setSortOrder] = useState('desc');

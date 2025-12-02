@@ -1,6 +1,7 @@
 # Polestar Journey Log Explorer - Architecture Documentation
 
-**Author**: Kinn Coelho Juliao  
+**Author / Maintainer**: Digvijay Singh (diggudg@gmail.com)  
+Original work by Kinn Coelho Juliao <kinncj@gmail.com> — sincere thanks to the original author for this project.
 **Date**: November 21, 2025
 
 ## Overview
@@ -406,5 +407,5 @@ MIT License - Open source and free to use
 
 ---
 
-**Kinn Coelho Juliao**  
-Building tools for better EV ownership experience
+**Digvijay Singh** <diggudg@gmail.com>
+Maintainer of this fork. Original project by Kinn Coelho Juliao — thanks to the original contributor for the foundation.

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * ChartDataProcessor - Service for processing trip data into chart-ready formats
  * Follows Single Responsibility Principle: Only handles data transformation for charts

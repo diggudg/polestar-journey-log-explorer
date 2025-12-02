@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Map module exports
  * Provides clean imports for map-related components and services

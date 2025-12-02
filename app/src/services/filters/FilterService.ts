@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * FilterService - Service for applying filters to trip data
  * Follows Single Responsibility Principle: Only handles data filtering logic

@@ -45,7 +45,7 @@ export const generateTripId = (trip) => {
 export const getAllTags = () => {
     const annotations = getTripAnnotations();
     const allTags = new Set();
-    Object.values(annotations).forEach(annotation => {
+    Object.values(annotations).forEach((annotation: any) => {
         if (annotation.tags) {
             annotation.tags.forEach(tag => allTags.add(tag));
         }

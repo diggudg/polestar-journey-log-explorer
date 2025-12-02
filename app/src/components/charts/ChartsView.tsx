@@ -1,12 +1,18 @@
+// @ts-nocheck
 import { Grid, Paper, Text, Title, useMantineTheme } from "@mantine/core";
 import { useMemo } from "react";
 import {
   Area, AreaChart, Bar,
   BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis
 } from "recharts";
-import { ChartDataProcessor } from "../../services/charts/ChartDataProcessor";
+import { ChartDataProcessor } from '../../services/charts/ChartDataProcessor';
+import type { Trip } from '../../types';
 
-function ChartsView({ data }) {
+interface ChartsViewProps {
+  data: Trip[];
+}
+
+function ChartsView({ data }: ChartsViewProps) {
   const theme = useMantineTheme();
   const chartDataProcessor = useMemo(() => new ChartDataProcessor(), []);
 

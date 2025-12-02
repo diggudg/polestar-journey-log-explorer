@@ -28,7 +28,7 @@ That's it! 🎉
 
 ```bash
 # Clone the repository
-git clone https://github.com/polestar-oss/polestar-journey-log-explorer.git
+git clone https://github.com/diggudg/polestar-journey-log-explorer.git
 cd polestar-journey-log-explorer
 
 # Install dependencies
@@ -79,4 +79,4 @@ npm run deploy      # Deploy to GitHub Pages
 
 **Happy analyzing!** ⚡🚗
 
-*Kinn Coelho Juliao*
+*Maintained by Digvijay Singh <diggudg@gmail.com>. Original project by Kinn Coelho Juliao <kinncj@gmail.com> — many thanks to the original author.*

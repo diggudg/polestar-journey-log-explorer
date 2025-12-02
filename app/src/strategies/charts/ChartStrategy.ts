@@ -32,6 +32,9 @@ export class ChartStrategy {
  * TimeSeriesChartStrategy - Strategy for rendering time series charts
  */
 export class TimeSeriesChartStrategy extends ChartStrategy {
+    dataKeys: string[];
+    colors: string[];
+    
     constructor(dataKeys = ['distance', 'consumption'], colors = ['#228be6', '#fab005']) {
         super();
         this.dataKeys = dataKeys;
@@ -80,6 +83,9 @@ export class TimeSeriesChartStrategy extends ChartStrategy {
  * PieChartStrategy - Strategy for rendering pie charts
  */
 export class PieChartStrategy extends ChartStrategy {
+    dataKey: string;
+    nameKey: string;
+    
     constructor(dataKey = 'count', nameKey = 'range') {
         super();
         this.dataKey = dataKey;
@@ -118,6 +124,9 @@ export class PieChartStrategy extends ChartStrategy {
  * BarChartStrategy - Strategy for rendering bar charts
  */
 export class BarChartStrategy extends ChartStrategy {
+    dataKeys: string[];
+    colors: string[];
+    
     constructor(dataKeys = ['value'], colors = ['#228be6']) {
         super();
         this.dataKeys = dataKeys;
@@ -156,6 +165,8 @@ export class BarChartStrategy extends ChartStrategy {
  * ComposedChartStrategy - Strategy for charts with multiple visualization types
  */
 export class ComposedChartStrategy extends ChartStrategy {
+    config: any;
+    
     constructor(config) {
         super();
         this.config = config;

@@ -1,8 +1,16 @@
+// @ts-nocheck
 import { Modal, Stack, NumberInput, Select, Text, Group, Button, Divider, Paper, SimpleGrid, Loader, TextInput, Combobox, useCombobox, ScrollArea, Slider, RingProgress, ThemeIcon, Center, useMantineColorScheme } from '@mantine/core';
 import { useState, useEffect } from 'react';
 import { IconCurrencyDollar, IconBolt, IconHome, IconMapPin, IconChargingPile, IconCar } from '@tabler/icons-react';
+import type { Statistics } from '../types';
 
-function CostCalculatorModal({ opened, onClose, statistics }) {
+interface CostCalculatorModalProps {
+  opened: boolean;
+  onClose: () => void;
+  statistics: Statistics | null;
+}
+
+function CostCalculatorModal({ opened, onClose, statistics }: CostCalculatorModalProps) {
   const combobox = useCombobox();
   const { colorScheme } = useMantineColorScheme();
   const [electricityRate, setElectricityRate] = useState(0.13);

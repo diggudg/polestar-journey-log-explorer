@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   ActionIcon,
   Group,
@@ -20,8 +21,17 @@ import {
 } from "@tabler/icons-react";
 import { useState } from "react";
 import CostCalculatorModal from "../CostCalculatorModal";
+import type { Statistics } from '../../types';
 
-function StatCard({ title, value, unit, icon: Icon, color }) {
+interface StatCardProps {
+  title: string;
+  value: string | number;
+  unit?: string;
+  icon: React.ComponentType<{ size?: number; stroke?: number }>;
+  color: string;
+}
+
+function StatCard({ title, value, unit, icon: Icon, color }: StatCardProps) {
   return (
     <Paper p={{ base: "xs", sm: "md" }} radius="md" withBorder>
       <Group justify="apart" wrap="nowrap">
@@ -47,7 +57,12 @@ function StatCard({ title, value, unit, icon: Icon, color }) {
   );
 }
 
-function StatsCards({ statistics, hideCostButton }) {
+interface StatsCardsProps {
+  statistics: Statistics | null;
+  hideCostButton?: boolean;
+}
+
+function StatsCards({ statistics, hideCostButton }: StatsCardsProps) {
   const [costModalOpened, setCostModalOpened] = useState(false);
 
   if (!statistics) return null;

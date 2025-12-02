@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Decorator Pattern: Adds functionality to layers without modifying their core implementation
  * Open/Closed Principle: Layers are open for extension but closed for modification

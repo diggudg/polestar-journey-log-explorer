@@ -41,5 +41,6 @@ graph TD
 
 ---
 
-**Author**: Kinn Coelho Juliao  
+**Author / Maintainer**: Digvijay Singh <diggudg@gmail.com>  
+Originally authored by Kinn Coelho Juliao <kinncj@gmail.com> — thanks to the original contributor.
 **Last Updated**: November 21, 2025

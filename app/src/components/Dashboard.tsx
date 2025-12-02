@@ -38,6 +38,8 @@ import { TableExporter } from "../services/table/TableDataProcessor";
 import HelpModal from "./HelpModal";
 import CostCalculatorModal from "./CostCalculatorModal";
 
+import type { Trip } from '../types';
+
 // Columns to be used for CSV export and potentially other components.
 const COLUMNS = [
   { key: "startDate", label: "Start Date" },
@@ -58,7 +60,12 @@ const COLUMNS = [
 // Initialize the stateless TableExporter once outside the component
 const tableExporter = new TableExporter();
 
-function Dashboard({ data, onReset }) {
+interface DashboardProps {
+  data: Trip[];
+  onReset: () => void;
+}
+
+function Dashboard({ data, onReset }: DashboardProps) {
   const [activeTab, setActiveTab] = useState("overview");
   const [filteredData, setFilteredData] = useState(data);
   const [helpOpened, setHelpOpened] = useState(false);
@@ -69,7 +76,7 @@ function Dashboard({ data, onReset }) {
     [filteredData]
   );
 
-  const handleFilterChange = (filtered) => {
+  const handleFilterChange = (filtered: Trip[]) => {
     setFilteredData(filtered);
   };
 
