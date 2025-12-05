@@ -9,7 +9,6 @@ import {
   Stack,
   Text,
   Tooltip,
-  useMantineColorScheme,
 } from '@mantine/core';
 import { Dropzone } from '@mantine/dropzone';
 import { notifications } from '@mantine/notifications';
@@ -34,7 +33,7 @@ function FileUploader({ onDataLoaded, vehicleStatusData, chargingData }) {
   const [anomalies, setAnomalies] = useState([]);
   const [modalOpened, setModalOpened] = useState(false);
   const [pendingData, setPendingData] = useState(null);
-  const { colorScheme } = useMantineColorScheme();
+  const logoSrc = `${import.meta.env.BASE_URL}polestar-telemetry-logo.png`;
 
   const handleJourneyDrop = async (files) => {
     if (files.length === 0) return;
@@ -114,9 +113,7 @@ function FileUploader({ onDataLoaded, vehicleStatusData, chargingData }) {
     <Stack gap="xl" mt="xl">
       <div>
         <Image
-          src={
-            colorScheme === 'dark' ? '/polestar-telemetry-logo.png' : '/polestar-telemetry-logo.png'
-          }
+          src={logoSrc}
           alt="Polestar Telemetry Logo"
           h={120}
           fit="contain"

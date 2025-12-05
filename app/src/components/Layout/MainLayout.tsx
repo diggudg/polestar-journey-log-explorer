@@ -46,6 +46,7 @@ const MainLayout = ({
   const [mobileOpened, setMobileOpened] = useState(false);
   const [desktopOpened, setDesktopOpened] = useState(true);
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const logoSrc = `${import.meta.env.BASE_URL}polestar-telemetry-logo.png`;
 
   const mainLinks = [
     { icon: IconLayoutDashboard, label: 'Dashboard', value: 'overview' },
@@ -144,12 +145,7 @@ const MainLayout = ({
               size="sm"
             />
             <Group gap="xs">
-              <Image
-                src="/polestar-telemetry-logo.png"
-                alt="Polestar Telemetry Logo"
-                h={30}
-                fit="contain"
-              />
+              <Image src={logoSrc} alt="Polestar Telemetry Logo" h={30} fit="contain" />
               <Text fw={700} size="lg" visibleFrom="xs">
                 Polestar Telemetry
               </Text>
