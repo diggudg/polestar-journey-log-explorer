@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard';
 import FileUploadModal from './components/FileUploadModal';
 import JourneyExplorer from './components/JourneyExplorer';
 import MainLayout from './components/Layout/MainLayout';
+import TripPlanner from './components/TripPlanner/TripPlanner';
 import VehicleStatus from './components/vehicle/VehicleStatus';
 import { DataValidator } from './utils/DataValidator';
 
@@ -127,6 +128,9 @@ function App() {
             <Text c="dimmed">Please upload journey data to view the explorer.</Text>
           </Paper>
         );
+
+      case 'planner':
+        return <TripPlanner />;
       case 'analytics':
         return journeyData ? (
           <AnalyticsView data={journeyData} />

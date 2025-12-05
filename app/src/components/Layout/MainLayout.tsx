@@ -19,6 +19,7 @@ import {
   IconDeviceAnalytics,
   IconLayoutDashboard,
   IconMap,
+  IconMapPin,
   IconMoon,
   IconShieldCheck,
   IconSun,
@@ -221,6 +222,29 @@ const MainLayout = ({
               </Group>
             </UnstyledButton>
           ))}
+          <UnstyledButton
+            className={classes.control}
+            data-active={activeTab === 'planner' || undefined}
+            onClick={() => {
+              onTabChange('planner');
+              setMobileOpened(false);
+            }}
+          >
+            <Group gap={0}>
+              <Box
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: rem(40),
+                  height: rem(40),
+                }}
+              >
+                <IconMapPin style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
+              </Box>
+              <span style={{ flex: 1 }}>Trip Planner</span>
+            </Group>
+          </UnstyledButton>
         </AppShell.Section>
 
         <AppShell.Section>
