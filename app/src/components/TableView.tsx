@@ -1,4 +1,17 @@
-import { ActionIcon, Badge, Group, Pagination, Paper, ScrollArea, Select, Stack, Table, Text, TextInput, Tooltip } from '@mantine/core';
+import {
+  ActionIcon,
+  Badge,
+  Group,
+  Pagination,
+  Paper,
+  ScrollArea,
+  Select,
+  Stack,
+  Table,
+  Text,
+  TextInput,
+  Tooltip,
+} from '@mantine/core';
 import { IconNote, IconSearch, IconTag } from '@tabler/icons-react';
 import { useMemo, useState } from 'react';
 import { generateTripId, getTripAnnotation } from '../utils/tripAnnotations';
@@ -17,10 +30,11 @@ function TableView({ data }) {
   const [itemsPerPage, setItemsPerPage] = useState('10');
 
   const filteredAndSortedData = useMemo(() => {
-    let filtered = data.filter(trip =>
-      trip.startAddress.toLowerCase().includes(search.toLowerCase()) ||
-      trip.endAddress.toLowerCase().includes(search.toLowerCase()) ||
-      trip.startDate.includes(search)
+    const filtered = data.filter(
+      (trip) =>
+        trip.startAddress.toLowerCase().includes(search.toLowerCase()) ||
+        trip.endAddress.toLowerCase().includes(search.toLowerCase()) ||
+        trip.startDate.includes(search)
     );
 
     filtered.sort((a, b) => {
@@ -47,12 +61,13 @@ function TableView({ data }) {
 
   // Pagination logic
   const paginatedData = useMemo(() => {
-    const start = (activePage - 1) * parseInt(itemsPerPage);
-    const end = start + parseInt(itemsPerPage);
+    const pageSize = parseInt(itemsPerPage, 10);
+    const start = (activePage - 1) * pageSize;
+    const end = start + pageSize;
     return filteredAndSortedData.slice(start, end);
   }, [filteredAndSortedData, activePage, itemsPerPage]);
 
-  const totalPages = Math.ceil(filteredAndSortedData.length / parseInt(itemsPerPage));
+  const totalPages = Math.ceil(filteredAndSortedData.length / parseInt(itemsPerPage, 10));
 
   const getEfficiencyColor = (efficiency) => {
     const eff = parseFloat(efficiency);
@@ -234,7 +249,7 @@ function TableView({ data }) {
         tripId={selectedTripId}
         onSave={handleSaveAnnotation}
       />
-    </Paper >
+    </Paper>
   );
 }
 

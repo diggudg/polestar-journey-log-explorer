@@ -1,10 +1,33 @@
-import { ActionIcon, Badge, Group, Pagination, Paper, ScrollArea, Select, Stack, Table, Text, TextInput, Tooltip, UnstyledButton, Center, rem } from '@mantine/core';
-import { IconNote, IconSearch, IconTag, IconSelector, IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import {
+  ActionIcon,
+  Badge,
+  Center,
+  Group,
+  Pagination,
+  Paper,
+  rem,
+  ScrollArea,
+  Select,
+  Stack,
+  Table,
+  Text,
+  TextInput,
+  Tooltip,
+  UnstyledButton,
+} from '@mantine/core';
+import {
+  IconChevronDown,
+  IconChevronUp,
+  IconNote,
+  IconSearch,
+  IconSelector,
+  IconTag,
+} from '@tabler/icons-react';
 import { useMemo, useState } from 'react';
 import { TableDataProcessor, TableRowFormatter } from '../../services/table/TableDataProcessor';
+import type { Trip } from '../../types';
 import { generateTripId, getTripAnnotation } from '../../utils/tripAnnotations';
 import TripNotesModal from '../TripNotesModal';
-import type { Trip } from '../../types';
 
 interface TableViewProps {
   data: Trip[];
@@ -33,7 +56,11 @@ function TableView({ data, selectedTripId, onTripSelect }: TableViewProps) {
     let processed = data;
 
     // Apply search filter using service
-    processed = dataProcessor.filterData(processed, search, ['startAddress', 'endAddress', 'startDate']);
+    processed = dataProcessor.filterData(processed, search, [
+      'startAddress',
+      'endAddress',
+      'startDate',
+    ]);
 
     // Apply sorting using service
     processed = dataProcessor.sortData(processed, sortBy, sortOrder);
@@ -43,12 +70,13 @@ function TableView({ data, selectedTripId, onTripSelect }: TableViewProps) {
 
   // Pagination logic
   const paginatedData = useMemo(() => {
-    const start = (activePage - 1) * parseInt(itemsPerPage);
-    const end = start + parseInt(itemsPerPage);
+    const pageSize = parseInt(itemsPerPage, 10);
+    const start = (activePage - 1) * pageSize;
+    const end = start + pageSize;
     return filteredAndSortedData.slice(start, end);
   }, [filteredAndSortedData, activePage, itemsPerPage]);
 
-  const totalPages = Math.ceil(filteredAndSortedData.length / parseInt(itemsPerPage));
+  const totalPages = Math.ceil(filteredAndSortedData.length / parseInt(itemsPerPage, 10));
 
   const handleOpenModal = (trip, e) => {
     e.stopPropagation(); // Prevent row selection when clicking edit button
@@ -92,8 +120,6 @@ function TableView({ data, selectedTripId, onTripSelect }: TableViewProps) {
     setSortOrder(reversed ? 'desc' : 'asc');
   };
 
-
-
   const rows = paginatedData.map((trip) => {
     const tripId = generateTripId(trip);
     const annotation = getTripAnnotation(tripId);
@@ -107,10 +133,13 @@ function TableView({ data, selectedTripId, onTripSelect }: TableViewProps) {
     const isSelected = selectedTripId === tripId;
 
     return (
-      <Table.Tr 
-        key={trip.id} 
-        onClick={() => onTripSelect && onTripSelect(isSelected ? null : tripId)}
-        style={{ cursor: 'pointer', backgroundColor: isSelected ? 'rgba(25, 113, 194, 0.1)' : undefined }}
+      <Table.Tr
+        key={trip.id}
+        onClick={() => onTripSelect?.(isSelected ? null : tripId)}
+        style={{
+          cursor: 'pointer',
+          backgroundColor: isSelected ? 'rgba(25, 113, 194, 0.1)' : undefined,
+        }}
       >
         <Table.Td>{trip.startDate}</Table.Td>
         <Table.Td>{rowFormatter.truncateAddress(trip.startAddress, 40)}</Table.Td>
@@ -199,11 +228,10 @@ function TableView({ data, selectedTripId, onTripSelect }: TableViewProps) {
         </Group>
       </Stack>
 
-
-
       <Group justify="space-between" mb="sm">
         <Text size="sm" c="dimmed">
-          Showing {paginatedData.length} of {filteredAndSortedData.length} trips (Total: {data.length})
+          Showing {paginatedData.length} of {filteredAndSortedData.length} trips (Total:{' '}
+          {data.length})
         </Text>
 
         {/* Top Pagination for better accessibility */}
@@ -278,12 +306,7 @@ function TableView({ data, selectedTripId, onTripSelect }: TableViewProps) {
           size="xs"
           style={{ width: 100 }}
         />
-        <Pagination
-          total={totalPages}
-          value={activePage}
-          onChange={setActivePage}
-          color="orange"
-        />
+        <Pagination total={totalPages} value={activePage} onChange={setActivePage} color="orange" />
       </Group>
 
       <TripNotesModal
@@ -293,7 +316,7 @@ function TableView({ data, selectedTripId, onTripSelect }: TableViewProps) {
         tripId={selectedTripIdForModal}
         onSave={handleSaveAnnotation}
       />
-    </Paper >
+    </Paper>
   );
 }
 

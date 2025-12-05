@@ -1,7 +1,7 @@
 // @ts-nocheck
-import { Paper, Stack, Text, Grid, Group, Badge } from "@mantine/core";
-import { IconClock, IconBolt, IconCalendarEvent } from "@tabler/icons-react";
-import styles from "./VehicleStyles.module.css";
+import { Badge, Grid, Group, Paper, Stack, Text } from '@mantine/core';
+import { IconBolt, IconCalendarEvent, IconClock } from '@tabler/icons-react';
+import styles from './VehicleStyles.module.css';
 
 interface ChargingTimelineProps {
   chargeTimer: any;
@@ -11,7 +11,9 @@ export default function ChargingTimeline({ chargeTimer }: ChargingTimelineProps)
   if (!chargeTimer) {
     return (
       <Paper p="md" withBorder radius="md">
-        <Text c="dimmed" ta="center">No charging schedule available</Text>
+        <Text c="dimmed" ta="center">
+          No charging schedule available
+        </Text>
       </Paper>
     );
   }
@@ -34,8 +36,8 @@ export default function ChargingTimeline({ chargeTimer }: ChargingTimelineProps)
   const currentPercent = (currentMinutes / (24 * 60)) * 100;
 
   // Check if currently in charging window
-  const inWindow = currentMinutes >= (startHour * 60 + startMinute) && 
-                   currentMinutes <= (stopHour * 60 + stopMinute);
+  const inWindow =
+    currentMinutes >= startHour * 60 + startMinute && currentMinutes <= stopHour * 60 + stopMinute;
 
   const formatTime = (hour: number, minute: number) => {
     return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
@@ -45,14 +47,16 @@ export default function ChargingTimeline({ chargeTimer }: ChargingTimelineProps)
     <Paper p="md" withBorder radius="md">
       <Stack gap="md">
         <Group justify="space-between">
-          <Text fw={600} size="lg">Charging Schedule</Text>
-          <Badge 
-            size="lg" 
-            color={isActivated ? "orange" : "dark"} 
+          <Text fw={600} size="lg">
+            Charging Schedule
+          </Text>
+          <Badge
+            size="lg"
+            color={isActivated ? 'orange' : 'dark'}
             variant="light"
             leftSection={<IconCalendarEvent size={14} />}
           >
-            {isActivated ? "Active" : "Disabled"}
+            {isActivated ? 'Active' : 'Disabled'}
           </Badge>
         </Group>
 
@@ -62,21 +66,24 @@ export default function ChargingTimeline({ chargeTimer }: ChargingTimelineProps)
           <div className={styles.timelineBar} />
 
           {/* Charging window */}
-          <div 
+          <div
             className={`${styles.chargingWindow} ${isActivated ? styles.chargingWindowActive : styles.chargingWindowInactive}`}
             style={{ left: `${startPercent}%`, width: `${duration}%` }}
           />
 
           {/* Current time marker */}
-          <div 
-            className={styles.timeMarker}
-            style={{ left: `${currentPercent}%` }}
-          />
+          <div className={styles.timeMarker} style={{ left: `${currentPercent}%` }} />
 
           {/* Time labels */}
-          <Text size="xs" c="dimmed" className={`${styles.timeLabel} ${styles.timeLabelStart}`}>00:00</Text>
-          <Text size="xs" c="dimmed" className={`${styles.timeLabel} ${styles.timeLabelMiddle}`}>12:00</Text>
-          <Text size="xs" c="dimmed" className={`${styles.timeLabel} ${styles.timeLabelEnd}`}>24:00</Text>
+          <Text size="xs" c="dimmed" className={`${styles.timeLabel} ${styles.timeLabelStart}`}>
+            00:00
+          </Text>
+          <Text size="xs" c="dimmed" className={`${styles.timeLabel} ${styles.timeLabelMiddle}`}>
+            12:00
+          </Text>
+          <Text size="xs" c="dimmed" className={`${styles.timeLabel} ${styles.timeLabelEnd}`}>
+            24:00
+          </Text>
         </div>
 
         {/* Schedule Details */}
@@ -86,8 +93,12 @@ export default function ChargingTimeline({ chargeTimer }: ChargingTimelineProps)
               <Group gap="xs">
                 <IconClock size={16} color="#64748b" />
                 <div>
-                  <Text size="xs" c="dimmed">Start</Text>
-                  <Text size="sm" fw={600}>{formatTime(startHour, startMinute)}</Text>
+                  <Text size="xs" c="dimmed">
+                    Start
+                  </Text>
+                  <Text size="sm" fw={600}>
+                    {formatTime(startHour, startMinute)}
+                  </Text>
                 </div>
               </Group>
             </Paper>
@@ -97,8 +108,12 @@ export default function ChargingTimeline({ chargeTimer }: ChargingTimelineProps)
               <Group gap="xs">
                 <IconClock size={16} color="#64748b" />
                 <div>
-                  <Text size="xs" c="dimmed">End</Text>
-                  <Text size="sm" fw={600}>{formatTime(stopHour, stopMinute)}</Text>
+                  <Text size="xs" c="dimmed">
+                    End
+                  </Text>
+                  <Text size="sm" fw={600}>
+                    {formatTime(stopHour, stopMinute)}
+                  </Text>
                 </div>
               </Group>
             </Paper>
@@ -106,7 +121,13 @@ export default function ChargingTimeline({ chargeTimer }: ChargingTimelineProps)
         </Grid>
 
         {inWindow && isActivated && (
-          <Badge color="orange" variant="light" size="lg" fullWidth leftSection={<IconBolt size={14} />}>
+          <Badge
+            color="orange"
+            variant="light"
+            size="lg"
+            fullWidth
+            leftSection={<IconBolt size={14} />}
+          >
             Currently in Charging Window
           </Badge>
         )}

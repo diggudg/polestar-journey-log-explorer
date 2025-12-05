@@ -1,11 +1,27 @@
 // @ts-nocheck
-import { useState, useMemo } from 'react';
-import { Paper, Group, Select, NumberInput, Button, Popover, Stack, Text, Badge, MultiSelect, ActionIcon, Tooltip, Box } from '@mantine/core';
+
+import {
+  Box,
+  Button,
+  Group,
+  MultiSelect,
+  NumberInput,
+  Paper,
+  Popover,
+  Select,
+  Stack,
+  Text,
+} from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
-import { IconFilter, IconX, IconCalendar, IconTag, IconSettings } from '@tabler/icons-react';
-import { getAllTags, generateTripId, getTripAnnotation } from '../../utils/tripAnnotations';
-import { FilterService, FilterStateManager, FilterMetadataService } from '../../services/filters/FilterService';
+import { IconCalendar, IconSettings, IconTag, IconX } from '@tabler/icons-react';
+import { useMemo, useState } from 'react';
+import {
+  FilterMetadataService,
+  FilterService,
+  FilterStateManager,
+} from '../../services/filters/FilterService';
 import type { Trip } from '../../types';
+import { generateTripId, getAllTags, getTripAnnotation } from '../../utils/tripAnnotations';
 
 interface FilterBarProps {
   data: Trip[];
@@ -21,15 +37,12 @@ export default function FilterBar({ data, onFilterChange }: FilterBarProps) {
   const [filters, setFiltersState] = useState(filterStateManager.getFilters());
 
   // Calculate metadata
-  const metadata = useMemo(() => 
-    metadataService.getAllMetadata(data),
-    [data, metadataService]
-  );
+  const metadata = useMemo(() => metadataService.getAllMetadata(data), [data, metadataService]);
 
   const { categories, ranges: stats } = metadata;
 
-  const categoryOptions = useMemo(() => 
-    categories.map(cat => ({ value: cat, label: cat })),
+  const categoryOptions = useMemo(
+    () => categories.map((cat) => ({ value: cat, label: cat })),
     [categories]
   );
 
@@ -45,7 +58,7 @@ export default function FilterBar({ data, onFilterChange }: FilterBarProps) {
 
     // Apply tags filter
     if (currentFilters.tags && currentFilters.tags.length > 0) {
-      filtered = filtered.filter(trip => {
+      filtered = filtered.filter((trip) => {
         const tripId = generateTripId(trip);
         const annotation = getTripAnnotation(tripId);
         const tripTags = annotation.tags || [];
@@ -72,11 +85,7 @@ export default function FilterBar({ data, onFilterChange }: FilterBarProps) {
         <Group gap="sm">
           <Popover width={300} position="bottom-start" withArrow shadow="md">
             <Popover.Target>
-              <Button 
-                variant="light" 
-                leftSection={<IconCalendar size={16} />}
-                size="sm"
-              >
+              <Button variant="light" leftSection={<IconCalendar size={16} />} size="sm">
                 Date Range {filters.dateFrom || filters.dateTo ? '(Active)' : ''}
               </Button>
             </Popover.Target>
@@ -104,18 +113,22 @@ export default function FilterBar({ data, onFilterChange }: FilterBarProps) {
 
           <Popover width={300} position="bottom-start" withArrow shadow="md">
             <Popover.Target>
-              <Button 
-                variant="light" 
-                leftSection={<IconSettings size={16} />}
-                size="sm"
-              >
-                Metrics {filters.distanceMin || filters.distanceMax || filters.efficiencyMin || filters.efficiencyMax ? '(Active)' : ''}
+              <Button variant="light" leftSection={<IconSettings size={16} />} size="sm">
+                Metrics{' '}
+                {filters.distanceMin ||
+                filters.distanceMax ||
+                filters.efficiencyMin ||
+                filters.efficiencyMax
+                  ? '(Active)'
+                  : ''}
               </Button>
             </Popover.Target>
             <Popover.Dropdown>
               <Stack gap="md">
                 <Box>
-                  <Text size="sm" fw={500} c="dimmed" mb="xs">Distance (km)</Text>
+                  <Text size="sm" fw={500} c="dimmed" mb="xs">
+                    Distance (km)
+                  </Text>
                   <Group grow>
                     <NumberInput
                       placeholder={`Min: ${stats.minDistance || 0}`}
@@ -136,7 +149,9 @@ export default function FilterBar({ data, onFilterChange }: FilterBarProps) {
                   </Group>
                 </Box>
                 <Box>
-                  <Text size="sm" fw={500} c="dimmed" mb="xs">Efficiency (kWh/100km)</Text>
+                  <Text size="sm" fw={500} c="dimmed" mb="xs">
+                    Efficiency (kWh/100km)
+                  </Text>
                   <Group grow>
                     <NumberInput
                       placeholder={`Min: ${stats.minEfficiency || 0}`}

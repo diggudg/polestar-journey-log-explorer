@@ -1,0 +1,23 @@
+.control {
+  display: block;
+  width: 100%;
+  padding: var(--mantine-spacing-xs);
+  border-radius: var(--mantine-radius-md);
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
+  text-decoration: none;
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+}
+
+.control:hover {
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+}
+
+.control[data-active] {
+  background-color: light-dark(
+    var(--mantine-color-polestarOrange-light),
+    var(--mantine-color-polestarOrange-9)
+  );
+  color: light-dark(var(--mantine-color-polestarOrange-light-color), var(--mantine-color-white));
+}

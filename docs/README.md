@@ -228,8 +228,8 @@ All documentation follows these principles:
 
 ### Stay Updated
 
-- **Repository**: [github.com/diggudg/polestar-journey-log-explorer](https://github.com/diggudg/polestar-telemetry)
-- **Live Demo**: [kinncj.github.io/polestar-journey-log-explorer](https://diggudg.github.io/polestar-telemetry/)
+- **Repository**: [github.com/diggudg/polestar-telemetry](https://github.com/diggudg/polestar-telemetry)
+- **Live Demo**: [diggudg.github.io/polestar-telemetry](https://diggudg.github.io/polestar-telemetry/)
 
 ---
 

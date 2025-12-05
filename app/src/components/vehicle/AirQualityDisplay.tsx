@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { Paper, Stack, Text, Group, RingProgress, Badge, ThemeIcon, Grid } from "@mantine/core";
-import { IconWind, IconLeaf, IconAlertTriangle } from "@tabler/icons-react";
+import { Badge, Grid, Group, Paper, RingProgress, Stack, Text, ThemeIcon } from '@mantine/core';
+import { IconAlertTriangle, IconLeaf, IconWind } from '@tabler/icons-react';
 
 interface AirQualityDisplayProps {
   preCleaning: any;
@@ -10,21 +10,35 @@ export default function AirQualityDisplay({ preCleaning }: AirQualityDisplayProp
   if (!preCleaning) {
     return (
       <Paper p="md" withBorder radius="md">
-        <Text c="dimmed" ta="center">No air quality data available</Text>
+        <Text c="dimmed" ta="center">
+          No air quality data available
+        </Text>
       </Paper>
     );
   }
 
   const aqi = preCleaning.measuredAirQualityIndex || 0;
   const pm25 = preCleaning.measuredParticulateMatter25 || 0;
-  
+
   // AQI Rating (simplified scale)
   const getAQIRating = (value: number) => {
-    if (value <= 50) return { label: "Good", color: "orange", description: "Air quality is satisfactory" };
-    if (value <= 100) return { label: "Moderate", color: "orange", description: "Acceptable air quality" };
-    if (value <= 150) return { label: "Unhealthy for Sensitive", color: "orange", description: "Sensitive groups may experience effects" };
-    if (value <= 200) return { label: "Unhealthy", color: "orange", description: "Everyone may experience effects" };
-    return { label: "Very Unhealthy", color: "orange", description: "Health alert" };
+    if (value <= 50)
+      return { label: 'Good', color: 'orange', description: 'Air quality is satisfactory' };
+    if (value <= 100)
+      return { label: 'Moderate', color: 'orange', description: 'Acceptable air quality' };
+    if (value <= 150)
+      return {
+        label: 'Unhealthy for Sensitive',
+        color: 'orange',
+        description: 'Sensitive groups may experience effects',
+      };
+    if (value <= 200)
+      return {
+        label: 'Unhealthy',
+        color: 'orange',
+        description: 'Everyone may experience effects',
+      };
+    return { label: 'Very Unhealthy', color: 'orange', description: 'Health alert' };
   };
 
   const aqiRating = getAQIRating(aqi);
@@ -33,7 +47,9 @@ export default function AirQualityDisplay({ preCleaning }: AirQualityDisplayProp
   return (
     <Paper p="md" withBorder radius="md">
       <Stack gap="md">
-        <Text fw={600} size="lg">Cabin Air Quality</Text>
+        <Text fw={600} size="lg">
+          Cabin Air Quality
+        </Text>
 
         <Grid gutter="md">
           {/* AQI Gauge */}
@@ -77,8 +93,12 @@ export default function AirQualityDisplay({ preCleaning }: AirQualityDisplayProp
                     <IconWind size={28} />
                   </ThemeIcon>
                   <div>
-                    <Text size="xs" c="dimmed" fw={700} tt="uppercase">PM2.5 Level</Text>
-                    <Text size="xl" fw={700}>{pm25} μg/m³</Text>
+                    <Text size="xs" c="dimmed" fw={700} tt="uppercase">
+                      PM2.5 Level
+                    </Text>
+                    <Text size="xl" fw={700}>
+                      {pm25} μg/m³
+                    </Text>
                   </div>
                 </Group>
 
@@ -87,7 +107,11 @@ export default function AirQualityDisplay({ preCleaning }: AirQualityDisplayProp
                 </Text>
 
                 {pm25 > 35 && (
-                  <Badge color="orange" variant="light" leftSection={<IconAlertTriangle size={14} />}>
+                  <Badge
+                    color="orange"
+                    variant="light"
+                    leftSection={<IconAlertTriangle size={14} />}
+                  >
                     Elevated PM2.5
                   </Badge>
                 )}
@@ -104,14 +128,16 @@ export default function AirQualityDisplay({ preCleaning }: AirQualityDisplayProp
                 <IconLeaf size={20} />
               </ThemeIcon>
               <div>
-                <Text size="sm" fw={600}>Pre-Cleaning System</Text>
+                <Text size="sm" fw={600}>
+                  Pre-Cleaning System
+                </Text>
                 <Text size="xs" c="dimmed">
-                  {preCleaning.runningStatus === "RUNNING_STATUS_OFF" ? "Idle" : "Active"}
+                  {preCleaning.runningStatus === 'RUNNING_STATUS_OFF' ? 'Idle' : 'Active'}
                 </Text>
               </div>
             </Group>
             <Badge color="dark" variant="dot">
-              {preCleaning.lastCycleValid ? "Last Cycle OK" : "Ready"}
+              {preCleaning.lastCycleValid ? 'Last Cycle OK' : 'Ready'}
             </Badge>
           </Group>
         </Paper>

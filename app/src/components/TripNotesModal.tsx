@@ -1,8 +1,9 @@
 // @ts-nocheck
+
+import { Button, Group, Modal, MultiSelect, Stack, Textarea } from '@mantine/core';
+import { IconNote, IconTag } from '@tabler/icons-react';
 import { useState } from 'react';
-import { Modal, Textarea, Button, Group, MultiSelect, Stack } from '@mantine/core';
-import { IconTag, IconNote } from '@tabler/icons-react';
-import { saveTripAnnotation, getAllTags } from '../utils/tripAnnotations';
+import { getAllTags, saveTripAnnotation } from '../utils/tripAnnotations';
 
 function TripNotesModal({ opened, onClose, trip, tripId, onSave }) {
   const [notes, setNotes] = useState('');
@@ -22,18 +23,15 @@ function TripNotesModal({ opened, onClose, trip, tripId, onSave }) {
   };
 
   return (
-    <Modal
-      opened={opened}
-      onClose={handleClose}
-      title="Trip Notes & Tags"
-      size="lg"
-    >
+    <Modal opened={opened} onClose={handleClose} title="Trip Notes & Tags" size="lg">
       <Stack gap="md">
         <div>
-          <strong>Trip:</strong> {trip?.startAddress?.substring(0, 50)} → {trip?.endAddress?.substring(0, 50)}
+          <strong>Trip:</strong> {trip?.startAddress?.substring(0, 50)} →{' '}
+          {trip?.endAddress?.substring(0, 50)}
         </div>
         <div>
-          <strong>Date:</strong> {trip?.startDate} | <strong>Distance:</strong> {trip?.distanceKm} km
+          <strong>Date:</strong> {trip?.startDate} | <strong>Distance:</strong> {trip?.distanceKm}{' '}
+          km
         </div>
 
         <Textarea
@@ -67,9 +65,7 @@ function TripNotesModal({ opened, onClose, trip, tripId, onSave }) {
           <Button variant="subtle" onClick={handleClose}>
             Cancel
           </Button>
-          <Button onClick={handleSave}>
-            Save
-          </Button>
+          <Button onClick={handleSave}>Save</Button>
         </Group>
       </Stack>
     </Modal>

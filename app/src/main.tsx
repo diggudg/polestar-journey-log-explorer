@@ -1,7 +1,7 @@
+import { createTheme, MantineProvider, rem } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { MantineProvider, createTheme, rem } from '@mantine/core';
-import { Notifications } from '@mantine/notifications';
 import App from './App';
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';

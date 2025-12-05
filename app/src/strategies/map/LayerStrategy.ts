@@ -1,41 +1,42 @@
 import TileLayer from 'ol/layer/Tile';
-import XYZ from 'ol/source/XYZ';
 import OSM from 'ol/source/OSM';
+import XYZ from 'ol/source/XYZ';
 
 /**
  * Strategy Pattern: Defines interface for tile layer creation
  * Open/Closed Principle: Easy to add new tile layer types without modifying existing code
  */
 export class TileLayerStrategy {
-    createLayer() {
-        throw new Error('createLayer must be implemented by subclass');
-    }
+  createLayer() {
+    throw new Error('createLayer must be implemented by subclass');
+  }
 }
 
 /**
  * Concrete Strategy: OpenStreetMap Standard
  */
 export class OSMStandardStrategy extends TileLayerStrategy {
-    createLayer() {
-        return new TileLayer({
-            source: new OSM()
-        });
-    }
+  createLayer() {
+    return new TileLayer({
+      source: new OSM(),
+    });
+  }
 }
 
 /**
  * Concrete Strategy: OpenStreetMap Humanitarian
  */
 export class OSMHumanitarianStrategy extends TileLayerStrategy {
-    createLayer() {
-        return new TileLayer({
-            source: new XYZ({
-                url: 'https://tile-{a-c}.openstreetmap.fr/hot/{z}/{x}/{y}.png',
-                attributions: '© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>',
-                maxZoom: 19
-            })
-        });
-    }
+  createLayer() {
+    return new TileLayer({
+      source: new XYZ({
+        url: 'https://tile-{a-c}.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+        attributions:
+          '© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>',
+        maxZoom: 19,
+      }),
+    });
+  }
 }
 
 /**
@@ -43,27 +44,27 @@ export class OSMHumanitarianStrategy extends TileLayerStrategy {
  * Single Responsibility: Only responsible for creating tile layers
  */
 export class TileLayerFactory {
-    strategies: Record<string, TileLayerStrategy>;
-    
-    constructor() {
-        this.strategies = {
-            'osm': new OSMStandardStrategy(),
-            'osm-humanitarian': new OSMHumanitarianStrategy()
-        };
-    }
+  strategies: Record<string, TileLayerStrategy>;
 
-    createLayer(layerType) {
-        const strategy = this.strategies[layerType];
-        if (!strategy) {
-            throw new Error(`Unknown layer type: ${layerType}`);
-        }
-        return strategy.createLayer();
-    }
+  constructor() {
+    this.strategies = {
+      osm: new OSMStandardStrategy(),
+      'osm-humanitarian': new OSMHumanitarianStrategy(),
+    };
+  }
 
-    getAvailableLayers() {
-        return [
-            { value: 'osm', label: 'OpenStreetMap Standard' },
-            { value: 'osm-humanitarian', label: 'OpenStreetMap Humanitarian (HOT)' }
-        ];
+  createLayer(layerType) {
+    const strategy = this.strategies[layerType];
+    if (!strategy) {
+      throw new Error(`Unknown layer type: ${layerType}`);
     }
+    return strategy.createLayer();
+  }
+
+  getAvailableLayers() {
+    return [
+      { value: 'osm', label: 'OpenStreetMap Standard' },
+      { value: 'osm-humanitarian', label: 'OpenStreetMap Humanitarian (HOT)' },
+    ];
+  }
 }

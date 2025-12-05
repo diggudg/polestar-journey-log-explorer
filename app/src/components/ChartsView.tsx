@@ -1,7 +1,22 @@
 // @ts-nocheck
+
+import { Grid, Paper, Title } from '@mantine/core';
 import { useMemo } from 'react';
-import { Paper, Title, Grid } from '@mantine/core';
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
 function ChartsView({ data }) {
   const chartData = useMemo(() => {
@@ -23,8 +38,8 @@ function ChartsView({ data }) {
 
     // Efficiency distribution
     const efficiencyData = data
-      .filter(trip => trip.efficiency > 0 && trip.efficiency < 50)
-      .map(trip => ({
+      .filter((trip) => trip.efficiency > 0 && trip.efficiency < 50)
+      .map((trip) => ({
         efficiency: parseFloat(trip.efficiency),
         distance: trip.distanceKm,
       }))
@@ -39,20 +54,18 @@ function ChartsView({ data }) {
       { range: '50+ km', min: 50, max: Infinity, count: 0 },
     ];
 
-    data.forEach(trip => {
-      const range = distanceRanges.find(r => trip.distanceKm >= r.min && trip.distanceKm < r.max);
+    data.forEach((trip) => {
+      const range = distanceRanges.find((r) => trip.distanceKm >= r.min && trip.distanceKm < r.max);
       if (range) range.count++;
     });
 
     // SOC analysis
-    const socData = data
-      .slice(-20)
-      .map((trip, idx) => ({
-        trip: `Trip ${idx + 1}`,
-        startSOC: trip.socSource,
-        endSOC: trip.socDestination,
-        drop: trip.socDrop,
-      }));
+    const socData = data.slice(-20).map((trip, idx) => ({
+      trip: `Trip ${idx + 1}`,
+      startSOC: trip.socSource,
+      endSOC: trip.socDestination,
+      drop: trip.socDrop,
+    }));
 
     return {
       timeSeriesData,
@@ -68,12 +81,14 @@ function ChartsView({ data }) {
     <Grid gutter="md">
       <Grid.Col span={{ base: 12, md: 6 }}>
         <Paper p="md" withBorder>
-          <Title order={4} mb="md">Daily Distance & Consumption</Title>
+          <Title order={4} mb="md">
+            Daily Distance & Consumption
+          </Title>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={chartData.timeSeriesData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis 
-                dataKey="date" 
+              <XAxis
+                dataKey="date"
                 angle={-45}
                 textAnchor="end"
                 height={80}
@@ -83,7 +98,12 @@ function ChartsView({ data }) {
               <Tooltip />
               <Legend />
               <Line type="monotone" dataKey="distance" stroke="#228be6" name="Distance (km)" />
-              <Line type="monotone" dataKey="consumption" stroke="#fab005" name="Consumption (kWh)" />
+              <Line
+                type="monotone"
+                dataKey="consumption"
+                stroke="#fab005"
+                name="Consumption (kWh)"
+              />
             </LineChart>
           </ResponsiveContainer>
         </Paper>
@@ -91,7 +111,9 @@ function ChartsView({ data }) {
 
       <Grid.Col span={{ base: 12, md: 6 }}>
         <Paper p="md" withBorder>
-          <Title order={4} mb="md">Trip Distance Distribution</Title>
+          <Title order={4} mb="md">
+            Trip Distance Distribution
+          </Title>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -103,8 +125,11 @@ function ChartsView({ data }) {
                 outerRadius={100}
                 label={({ range, count }) => `${range}: ${count}`}
               >
-                {chartData.distanceRanges.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                {chartData.distanceRanges.map((rangeInfo, index) => (
+                  <Cell
+                    key={`distance-${rangeInfo.range}-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
               <Tooltip />
@@ -115,12 +140,19 @@ function ChartsView({ data }) {
 
       <Grid.Col span={{ base: 12, md: 6 }}>
         <Paper p="md" withBorder>
-          <Title order={4} mb="md">Efficiency per Trip</Title>
+          <Title order={4} mb="md">
+            Efficiency per Trip
+          </Title>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={chartData.efficiencyData.slice(0, 30)}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="distance" label={{ value: 'Distance (km)', position: 'insideBottom', offset: -5 }} />
-              <YAxis label={{ value: 'Efficiency (kWh/100km)', angle: -90, position: 'insideLeft' }} />
+              <XAxis
+                dataKey="distance"
+                label={{ value: 'Distance (km)', position: 'insideBottom', offset: -5 }}
+              />
+              <YAxis
+                label={{ value: 'Efficiency (kWh/100km)', angle: -90, position: 'insideLeft' }}
+              />
               <Tooltip />
               <Bar dataKey="efficiency" fill="#12b886" />
             </BarChart>
@@ -130,12 +162,23 @@ function ChartsView({ data }) {
 
       <Grid.Col span={{ base: 12, md: 6 }}>
         <Paper p="md" withBorder>
-          <Title order={4} mb="md">Battery SOC Changes (Last 20 Trips)</Title>
+          <Title order={4} mb="md">
+            Battery SOC Changes (Last 20 Trips)
+          </Title>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={chartData.socData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="trip" angle={-45} textAnchor="end" height={80} tick={{ fontSize: 12 }} />
-              <YAxis domain={[0, 100]} label={{ value: 'SOC (%)', angle: -90, position: 'insideLeft' }} />
+              <XAxis
+                dataKey="trip"
+                angle={-45}
+                textAnchor="end"
+                height={80}
+                tick={{ fontSize: 12 }}
+              />
+              <YAxis
+                domain={[0, 100]}
+                label={{ value: 'SOC (%)', angle: -90, position: 'insideLeft' }}
+              />
               <Tooltip />
               <Legend />
               <Line type="monotone" dataKey="startSOC" stroke="#228be6" name="Start SOC" />
@@ -147,11 +190,19 @@ function ChartsView({ data }) {
 
       <Grid.Col span={12}>
         <Paper p="md" withBorder>
-          <Title order={4} mb="md">Daily Trip Count</Title>
+          <Title order={4} mb="md">
+            Daily Trip Count
+          </Title>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={chartData.timeSeriesData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" angle={-45} textAnchor="end" height={80} tick={{ fontSize: 12 }} />
+              <XAxis
+                dataKey="date"
+                angle={-45}
+                textAnchor="end"
+                height={80}
+                tick={{ fontSize: 12 }}
+              />
               <YAxis />
               <Tooltip />
               <Bar dataKey="trips" fill="#be4bdb" name="Number of Trips" />

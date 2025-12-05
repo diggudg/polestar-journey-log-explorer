@@ -1,226 +1,216 @@
 // @ts-nocheck
-import { useState } from "react";
-import {
-  AppShell,
-  Container,
-  Title,
-  Text,
-  ActionIcon,
-  Group,
-  Tooltip,
-  useMantineColorScheme,
-  Image,
-  Anchor,
-  Divider,
-  Stack,
-  Box,
-} from "@mantine/core";
-import { IconSun, IconMoon, IconBrandGithub } from "@tabler/icons-react";
-import FileUploader from "./components/FileUploader";
-import Dashboard from "./components/Dashboard";
+
+import { Button, Paper, Stack, Text, Title } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { IconCar, IconUpload } from '@tabler/icons-react';
+import { useState } from 'react';
+import AnomalyCorrectionModal from './components/AnomalyCorrectionModal';
+import AnalyticsView from './components/analytics/AnalyticsView';
+import Dashboard from './components/Dashboard';
+import FileUploadModal from './components/FileUploadModal';
+import JourneyExplorer from './components/JourneyExplorer';
+import MainLayout from './components/Layout/MainLayout';
+import VehicleStatus from './components/vehicle/VehicleStatus';
+import { DataValidator } from './utils/DataValidator';
 
 function App() {
   const [journeyData, setJourneyData] = useState(null);
   const [vehicleStatusData, setVehicleStatusData] = useState(null);
   const [chargingData, setChargingData] = useState(null);
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const [activeTab, setActiveTab] = useState('overview');
+  const [uploadModalOpened, { open: openUploadModal, close: closeUploadModal }] =
+    useDisclosure(false);
+  const [costCalculatorSignal, setCostCalculatorSignal] = useState(0);
+
+  // Anomaly Handling
+  const [anomalies, setAnomalies] = useState([]);
+  const [pendingJourneyData, setPendingJourneyData] = useState(null);
+  const [anomalyModalOpened, { open: openAnomalyModal, close: closeAnomalyModal }] =
+    useDisclosure(false);
 
   const handleDataLoaded = (type, data) => {
-    if (type === 'journey') setJourneyData(data);
+    if (type === 'journey') {
+      const issues = DataValidator.validate(data);
+      if (issues.length > 0) {
+        setAnomalies(issues);
+        setPendingJourneyData(data);
+        openAnomalyModal();
+      } else {
+        setJourneyData(data);
+      }
+    }
     if (type === 'vehicle' || type === 'vts') setVehicleStatusData(data);
     if (type === 'charging' || type === 'chronos') setChargingData(data);
   };
 
-  const handleReset = () => {
-    setJourneyData(null);
-    setVehicleStatusData(null);
-    setChargingData(null);
+  const handleAnomalyCorrection = (corrections) => {
+    // Apply corrections to pendingJourneyData
+    const cleanedData = [...pendingJourneyData];
+
+    // Sort corrections descending by index to handle deletions without shifting issues
+    // But we map by ID or index. The modal uses index.
+    // Corrections array: { tripIndex, action, newData }
+
+    // We need to handle 'skip' (delete) and 'correct' (update)
+    // Let's create a map or set of indices to remove
+    const indicesToRemove = new Set();
+    const updates = new Map();
+
+    corrections.forEach((c) => {
+      if (c.action === 'skip') {
+        indicesToRemove.add(c.tripIndex);
+      } else if (c.action === 'correct') {
+        updates.set(c.tripIndex, c.newData);
+      }
+    });
+
+    const finalData = cleanedData
+      .filter((_item, index) => !indicesToRemove.has(index))
+      .map((item, index) => {
+        // If this index is being removed, filter moved it out mostly.
+        // Wait, filter runs on all. We need original index.
+        // The issue is filter re-indexes.
+        // Better: map first, then filter nulls? Or standard loop.
+        // Actually, our anomaly modal uses the index from the *original* array passed to it.
+        // pendingJourneyData is that array.
+        // So we should iterate over pendingJourneyData.
+
+        if (indicesToRemove.has(index)) return null;
+
+        if (updates.has(index)) {
+          return { ...item, ...updates.get(index) };
+        }
+        return item;
+      })
+      .filter(Boolean); // Remove nulls (skipped items)
+
+    setJourneyData(finalData);
+    setPendingJourneyData(null);
+    setAnomalies([]);
+    closeAnomalyModal();
+  };
+
+  const openCostCalculator = () => {
+    setActiveTab('overview');
+    setCostCalculatorSignal((prev) => prev + 1);
+  };
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'overview':
+        return journeyData ? (
+          <Dashboard data={journeyData} costCalculatorSignal={costCalculatorSignal} />
+        ) : (
+          <Paper p="xl" withBorder radius="md" ta="center" mt="xl">
+            <Stack align="center" gap="md">
+              <IconUpload size={48} stroke={1.5} color="var(--mantine-color-polestarGrey-5)" />
+              <Title order={3}>No Journey Data</Title>
+              <Text c="dimmed" maw={400}>
+                Upload your journey log file (csv/xlsx) to see your dashboard.
+              </Text>
+              <Button
+                variant="light"
+                color="polestarOrange"
+                leftSection={<IconUpload size={16} />}
+                onClick={openUploadModal}
+              >
+                Upload Data
+              </Button>
+            </Stack>
+          </Paper>
+        );
+      case 'explorer':
+        return journeyData ? (
+          <JourneyExplorer data={journeyData} />
+        ) : (
+          <Paper p="xl" withBorder radius="md" ta="center" mt="xl">
+            <Text c="dimmed">Please upload journey data to view the explorer.</Text>
+          </Paper>
+        );
+      case 'analytics':
+        return journeyData ? (
+          <AnalyticsView data={journeyData} />
+        ) : (
+          <Paper p="xl" withBorder radius="md" ta="center" mt="xl">
+            <Text c="dimmed">Please upload journey data to view analytics.</Text>
+          </Paper>
+        );
+      case 'vehicle':
+      case 'charging':
+      case 'health': {
+        // Pass the specific tab to VehicleStatus if it handles sub-tabs,
+        // or we can handle routing here.
+        // The original Dashboard had sub-tabs for vehicle.
+        // Let's reuse VehicleStatus and pass the active sub-tab.
+        // We might need to map 'vehicle', 'charging', 'health' to what VehicleStatus expects.
+        // VehicleStatus expects: 'overview', 'health', 'air', 'climate', 'charging', 'stats'
+        // Our MainLayout emits 'vehicle', 'charging', 'health'.
+        // Let's map them.
+        let subTab = 'overview';
+        if (activeTab === 'charging') subTab = 'charging';
+        if (activeTab === 'health') subTab = 'health';
+
+        return vehicleStatusData ? (
+          <VehicleStatus
+            telematics={vehicleStatusData.telematics}
+            charging={chargingData}
+            activeTab={subTab}
+            onUpload={(_file) => {
+              // This callback in VehicleStatus was for charging data upload.
+              // We can reuse the modal or keep it as is if it uses internal logic.
+              // But VehicleStatus uses onUpload prop to bubble up file.
+              // Let's just open our modal? No, VehicleStatus might expect immediate file handling.
+              // Let's check VehicleStatus implementation later. For now, pass a dummy or handle it.
+              // Actually, let's just open the global modal for simplicity if the user wants to upload.
+              openUploadModal();
+            }}
+          />
+        ) : (
+          <Paper p="xl" withBorder radius="md" ta="center" mt="xl">
+            <Stack align="center">
+              <IconCar size={48} stroke={1.5} color="var(--mantine-color-polestarGrey-5)" />
+              <Title order={3}>No Vehicle Data</Title>
+              <Text c="dimmed" maw={400}>
+                Upload your vehicle status file (vts.json) to see battery, service, and location
+                information.
+              </Text>
+              <Button
+                variant="light"
+                color="polestarOrange"
+                leftSection={<IconUpload size={16} />}
+                onClick={openUploadModal}
+              >
+                Upload vts.json
+              </Button>
+            </Stack>
+          </Paper>
+        );
+      }
+      default:
+        return null;
+    }
   };
 
   return (
-    <AppShell
-      header={{ height: { base: 60, sm: 70 } }}
-      padding={{ base: "xs", sm: "md" }}
+    <MainLayout
+      activeTab={activeTab}
+      onTabChange={setActiveTab}
+      onUploadClick={openUploadModal}
+      onCostCalculatorClick={openCostCalculator}
     >
-      <AppShell.Header>
-        <Container
-          size="xl"
-          h="100%"
-          px={{ base: "xs", sm: "md" }}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Group gap={{ base: "xs", sm: "md" }}>
-            <Image
-              src={
-                colorScheme === "dark"
-                  ? "/polestar-telemetry-logo.png"
-                  : "/polestar-telemetry-logo.png"
-              }
-              alt="Polestar Telemetry Logo"
-              h={35}
-              fit="contain"
-            />
-            <div>
-              <Title order={{ base: 4, sm: 2 }} style={{ lineHeight: 1.2 }}>
-                Polestar Telemetry
-              </Title>
-              <Text size="sm" c="dimmed" visibleFrom="sm">
-                Analyze your electric vehicle journey data
-              </Text>
-            </div>
-          </Group>
-          <Group>
-            <Tooltip
-              label={`Switch to ${
-                colorScheme === "dark" ? "light" : "dark"
-              } mode`}
-            >
-              <ActionIcon
-                variant="subtle"
-                size="lg"
-                onClick={() => toggleColorScheme()}
-              >
-                {colorScheme === "dark" ? (
-                  <IconSun size={20} />
-                ) : (
-                  <IconMoon size={20} />
-                )}
-              </ActionIcon>
-            </Tooltip>
-          </Group>
-        </Container>
-      </AppShell.Header>
-
-      <AppShell.Main>
-        <Container size="xl">
-          {!journeyData ? (
-            <FileUploader 
-              onDataLoaded={handleDataLoaded} 
-              vehicleStatusData={vehicleStatusData}
-              chargingData={chargingData}
-            />
-          ) : (
-            <Dashboard
-              data={journeyData}
-              vehicleStatusData={vehicleStatusData}
-              chargingData={chargingData}
-              onReset={handleReset}
-              onDataLoaded={handleDataLoaded}
-            />
-          )}
-        </Container>
-
-        <Box
-          component="footer"
-          mt="xl"
-          pt="xl"
-          style={{ borderTop: "1px solid var(--mantine-color-default-border)" }}
-        >
-          <Container size="xl" px={{ base: "xs", sm: "md" }}>
-            <Stack gap="sm">
-              <Stack gap="sm" hiddenFrom="sm">
-                <Group gap="xs" justify="center">
-                  <Image
-                    src={
-                      colorScheme === "dark"
-                        ? "/polestar-telemetry-logo.png"
-                        : "/polestar-telemetry-logo.png"
-                    }
-                    alt="Polestar Telemetry Logo"
-                    h={24}
-                    fit="contain"
-                  />
-                  <div>
-                    <Text size="xs" fw={500}>
-                      Polestar Telemetry
-                    </Text>
-                  </div>
-                </Group>
-                <Group gap="sm" justify="center">
-                  <Anchor
-                    href="https://github.com/diggudg/polestar-telemetry"
-                    target="_blank"
-                    c="dimmed"
-                    size="xs"
-                  >
-                    <Group gap={4}>
-                      <IconBrandGithub size={14} />
-                      <span>GitHub</span>
-                    </Group>
-                  </Anchor>
-                  <Anchor
-                    href="https://github.com/diggudg/polestar-telemetry/blob/main/LICENSE"
-                    target="_blank"
-                    c="dimmed"
-                    size="xs"
-                  >
-                    MIT License
-                  </Anchor>
-                </Group>
-              </Stack>
-              <Group justify="space-between" align="center" visibleFrom="sm">
-                <Group gap="md">
-                  <Image
-                    src={
-                      colorScheme === "dark"
-                        ? "/polestar-telemetry-logo.png"
-                        : "/polestar-telemetry-logo.png"
-                    }
-                    alt="Polestar Telemetry Logo"
-                    h={30}
-                    fit="contain"
-                  />
-                  <div>
-                    <Text size="sm" fw={500}>
-                      Polestar Telemetry
-                    </Text>
-                    <Text size="xs" c="dimmed">
-                      Vehicle data analysis and visualization
-                    </Text>
-                  </div>
-                </Group>
-                <Group gap="md">
-                  <Anchor
-                    href="https://github.com/diggudg/polestar-telemetry"
-                    target="_blank"
-                    c="dimmed"
-                    size="sm"
-                  >
-                    <Group gap={4}>
-                      <IconBrandGithub size={16} />
-                      <span>GitHub</span>
-                    </Group>
-                  </Anchor>
-                  <Anchor
-                    href="https://github.com/diggudg/polestar-telemetry/blob/main/LICENSE"
-                    target="_blank"
-                    c="dimmed"
-                    size="sm"
-                  >
-                    MIT License
-                  </Anchor>
-                </Group>
-              </Group>
-              <Divider />
-              <Box>
-                <Text size="xs" c="dimmed" ta="center">
-                  © 2025 Digvijay Singh &lt;diggudg@gmail.com&gt;
-                </Text>
-                <Text size="xs" c="dimmed" ta="center" mt={4}>
-                  This project is not affiliated with, endorsed by, or in any
-                  way officially connected with Polestar, the Polestar brand,
-                  Geely, or any of their subsidiaries.
-                </Text>
-              </Box>
-            </Stack>
-          </Container>
-        </Box>
-      </AppShell.Main>
-    </AppShell>
+      {renderContent()}
+      <FileUploadModal
+        opened={uploadModalOpened}
+        onClose={closeUploadModal}
+        onDataLoaded={handleDataLoaded}
+      />
+      <AnomalyCorrectionModal
+        opened={anomalyModalOpened}
+        onClose={closeAnomalyModal}
+        anomalies={anomalies}
+        onApply={handleAnomalyCorrection}
+      />
+    </MainLayout>
   );
 }
 

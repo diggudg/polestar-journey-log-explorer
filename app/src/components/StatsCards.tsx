@@ -1,18 +1,15 @@
 // @ts-nocheck
-import { useState } from 'react';
-import { Paper, SimpleGrid, Text, Group, ThemeIcon, ActionIcon, Tooltip } from '@mantine/core';
-import { 
-  IconRoute, 
-  IconBolt, 
-  IconGasStation, 
-  IconTrendingUp,
-  IconTrendingDown,
-  IconRoad,
-  IconLeaf,
+import { Group, Paper, SimpleGrid, Text, ThemeIcon } from '@mantine/core';
+import {
+  IconBolt,
   IconDroplet,
-  IconCurrencyDollar
+  IconGasStation,
+  IconLeaf,
+  IconRoad,
+  IconRoute,
+  IconTrendingDown,
+  IconTrendingUp,
 } from '@tabler/icons-react';
-import CostCalculatorModal from './CostCalculatorModal';
 
 function StatCard({ title, value, unit, icon: Icon, color }) {
   return (
@@ -23,7 +20,13 @@ function StatCard({ title, value, unit, icon: Icon, color }) {
             {title}
           </Text>
           <Text size="xl" fw={700} mt="xs">
-            {value}{unit && <Text span size="sm" c="dimmed" fw={400}> {unit}</Text>}
+            {value}
+            {unit && (
+              <Text span size="sm" c="dimmed" fw={400}>
+                {' '}
+                {unit}
+              </Text>
+            )}
           </Text>
         </div>
         <ThemeIcon size={44} radius="md" variant="light" color={color}>
@@ -35,32 +38,11 @@ function StatCard({ title, value, unit, icon: Icon, color }) {
 }
 
 function StatsCards({ statistics }) {
-  const [costModalOpened, setCostModalOpened] = useState(false);
-
   if (!statistics) return null;
 
   return (
-    <>
-      <Group justify="flex-end" mb="md">
-        <Tooltip label="Calculate charging costs" withArrow>
-            <ActionIcon
-              size="lg"
-              variant="filled"
-              color="polestarOrange"
-              onClick={() => setCostModalOpened(true)}
-            >
-            <IconCurrencyDollar size={20} />
-          </ActionIcon>
-        </Tooltip>
-      </Group>
-
-      <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="md">
-      <StatCard
-        title="Total Trips"
-        value={statistics.totalTrips}
-        icon={IconRoute}
-        color="blue"
-      />
+    <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="md">
+      <StatCard title="Total Trips" value={statistics.totalTrips} icon={IconRoute} color="blue" />
       <StatCard
         title="Total Distance"
         value={statistics.totalDistance}
@@ -80,7 +62,7 @@ function StatsCards({ statistics }) {
         value={statistics.avgEfficiency}
         unit="kWh/100km"
         icon={IconGasStation}
-          color="polestarOrange"
+        color="polestarOrange"
       />
       <StatCard
         title="Best Efficiency"
@@ -115,7 +97,7 @@ function StatsCards({ statistics }) {
         value={statistics.carbonSaved}
         unit="kg"
         icon={IconLeaf}
-          color="polestarOrange"
+        color="polestarOrange"
       />
       <StatCard
         title="Gas Not Used"
@@ -132,13 +114,6 @@ function StatsCards({ statistics }) {
         color="teal"
       />
     </SimpleGrid>
-
-    <CostCalculatorModal
-      opened={costModalOpened}
-      onClose={() => setCostModalOpened(false)}
-      statistics={statistics}
-    />
-    </>
   );
 }
 

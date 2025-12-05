@@ -1,7 +1,7 @@
 /**
  * Polestar Design System Color Constants
  * Based on official Polestar brand guidelines
- * 
+ *
  * Use these throughout the application for consistent theming
  */
 
@@ -17,19 +17,19 @@ export const PolestarColors = {
   accessibleSafetyOrange: '#F06E00', // For small text/icons on white
 
   // Alert/Accent Colors
-  parisDaisy: '#F7EA48',      // Yellow - warnings, highlights
-  aquamarine: '#59F3FD',       // Cyan - info accents
-  elementalBlue: '#4C94FE',    // Blue - info, links
-  elementalRed: '#D80F21',     // Red - alerts, errors, critical
+  parisDaisy: '#F7EA48', // Yellow - warnings, highlights
+  aquamarine: '#59F3FD', // Cyan - info accents
+  elementalBlue: '#4C94FE', // Blue - info, links
+  elementalRed: '#D80F21', // Red - alerts, errors, critical
 
   // Gold tones
   darkGold: '#866D4B',
   lightGold: '#D3BC8D',
 
   // System Status Colors
-  error: '#DE2D21',           // System error red
-  info: '#1EBBE5',            // Info blue
-  success: '#00E676',         // Success green
+  error: '#DE2D21', // System error red
+  info: '#1EBBE5', // Info blue
+  success: '#00E676', // Success green
 
   // Grey Scale (dark to light)
   ironGrey: '#53565A',
@@ -91,44 +91,44 @@ export const SemanticColors = {
 export const MantineColors = {
   // Polestar Safety Orange (Primary)
   polestarOrange: [
-    '#FFF3E6',   // 0 - lightest
-    '#FFE0C2',   // 1
-    '#FFCC99',   // 2
-    '#FFB366',   // 3
-    '#FF9933',   // 4
-    '#FF7500',   // 5 - Safety Orange (main)
-    '#F06E00',   // 6 - Accessible Safety Orange
-    '#CC5C00',   // 7
-    '#994500',   // 8
-    '#662E00',   // 9 - darkest
+    '#FFF3E6', // 0 - lightest
+    '#FFE0C2', // 1
+    '#FFCC99', // 2
+    '#FFB366', // 3
+    '#FF9933', // 4
+    '#FF7500', // 5 - Safety Orange (main)
+    '#F06E00', // 6 - Accessible Safety Orange
+    '#CC5C00', // 7
+    '#994500', // 8
+    '#662E00', // 9 - darkest
   ],
-  
+
   // Polestar Red (Alerts)
   polestarRed: [
-    '#FFE6E8',   // 0
-    '#FFBFC4',   // 1
-    '#FF9199',   // 2
-    '#FF636F',   // 3
-    '#FF3545',   // 4
-    '#D80F21',   // 5 - Elemental Red (main)
-    '#DE2D21',   // 6 - System Error
-    '#B80D1B',   // 7
-    '#8A0A14',   // 8
-    '#5C070E',   // 9
+    '#FFE6E8', // 0
+    '#FFBFC4', // 1
+    '#FF9199', // 2
+    '#FF636F', // 3
+    '#FF3545', // 4
+    '#D80F21', // 5 - Elemental Red (main)
+    '#DE2D21', // 6 - System Error
+    '#B80D1B', // 7
+    '#8A0A14', // 8
+    '#5C070E', // 9
   ],
 
   // Polestar Grey (Secondary)
   polestarGrey: [
-    '#F0F0F0',   // 0 - Light Grey
-    '#ECECE7',   // 1 - Signal White
-    '#D9D9D6',   // 2 - Grey White
-    '#C8C9C7',   // 3 - Grey Nurse
-    '#B1B3B3',   // 4 - Agathe Grey
-    '#97999B',   // 5 - Grey Chateau
-    '#75787B',   // 6 - Storm Grey
-    '#53565A',   // 7 - Iron Grey
-    '#3A3C3F',   // 8
-    '#1A1B1E',   // 9
+    '#F0F0F0', // 0 - Light Grey
+    '#ECECE7', // 1 - Signal White
+    '#D9D9D6', // 2 - Grey White
+    '#C8C9C7', // 3 - Grey Nurse
+    '#B1B3B3', // 4 - Agathe Grey
+    '#97999B', // 5 - Grey Chateau
+    '#75787B', // 6 - Storm Grey
+    '#53565A', // 7 - Iron Grey
+    '#3A3C3F', // 8
+    '#1A1B1E', // 9
   ],
 
   // Success Green
@@ -138,7 +138,7 @@ export const MantineColors = {
     '#80FFBB',
     '#4DFFA1',
     '#1AFF86',
-    '#00E676',   // 5 - Success Green (main)
+    '#00E676', // 5 - Success Green (main)
     '#00CC69',
     '#00B35C',
     '#00994F',
@@ -150,9 +150,9 @@ export const MantineColors = {
     '#E6FEFF',
     '#B3FCFF',
     '#80FAFF',
-    '#59F3FD',   // 3 - Aquamarine
+    '#59F3FD', // 3 - Aquamarine
     '#33F0FF',
-    '#1EBBE5',   // 5 - Info Blue (main)
+    '#1EBBE5', // 5 - Info Blue (main)
     '#17A2CC',
     '#1189B3',
     '#0B7099',
@@ -166,7 +166,7 @@ export const MantineColors = {
     '#FFF780',
     '#FFF34D',
     '#FFEF1A',
-    '#F7EA48',   // 5 - Paris Daisy (main)
+    '#F7EA48', // 5 - Paris Daisy (main)
     '#DED140',
     '#C5B838',
     '#AC9F30',

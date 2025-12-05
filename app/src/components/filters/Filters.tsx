@@ -1,11 +1,34 @@
 // @ts-nocheck
-import { useState, useMemo } from 'react';
-import { Paper, Group, Select, NumberInput, Button, Stack, Collapse, Text, Badge, MultiSelect } from '@mantine/core';
+
+import {
+  Badge,
+  Button,
+  Collapse,
+  Group,
+  MultiSelect,
+  NumberInput,
+  Paper,
+  Select,
+  Stack,
+  Text,
+} from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
-import { IconFilter, IconX, IconChevronDown, IconChevronUp, IconCalendar, IconTag } from '@tabler/icons-react';
-import { getAllTags, generateTripId, getTripAnnotation } from '../../utils/tripAnnotations';
-import { FilterService, FilterStateManager, FilterMetadataService } from '../../services/filters/FilterService';
+import {
+  IconCalendar,
+  IconChevronDown,
+  IconChevronUp,
+  IconFilter,
+  IconTag,
+  IconX,
+} from '@tabler/icons-react';
+import { useMemo, useState } from 'react';
+import {
+  FilterMetadataService,
+  FilterService,
+  FilterStateManager,
+} from '../../services/filters/FilterService';
 import type { Trip } from '../../types';
+import { generateTripId, getAllTags, getTripAnnotation } from '../../utils/tripAnnotations';
 
 interface FiltersProps {
   data: Trip[];
@@ -23,15 +46,12 @@ function Filters({ data, onFilterChange }: FiltersProps) {
   const [filters, setFiltersState] = useState(filterStateManager.getFilters());
 
   // Calculate metadata using service
-  const metadata = useMemo(() => 
-    metadataService.getAllMetadata(data),
-    [data, metadataService]
-  );
+  const metadata = useMemo(() => metadataService.getAllMetadata(data), [data, metadataService]);
 
   const { categories, ranges: stats } = metadata;
 
-  const categoryOptions = useMemo(() => 
-    categories.map(cat => ({ value: cat, label: cat })),
+  const categoryOptions = useMemo(
+    () => categories.map((cat) => ({ value: cat, label: cat })),
     [categories]
   );
 
@@ -48,11 +68,11 @@ function Filters({ data, onFilterChange }: FiltersProps) {
 
     // Apply tags filter (special case requiring annotation utility)
     if (currentFilters.tags && currentFilters.tags.length > 0) {
-      filtered = filtered.filter(trip => {
+      filtered = filtered.filter((trip) => {
         const tripId = generateTripId(trip);
         const annotation = getTripAnnotation(tripId);
         const tripTags = annotation.tags || [];
-        return currentFilters.tags.some(tag => tripTags.includes(tag));
+        return currentFilters.tags.some((tag) => tripTags.includes(tag));
       });
     }
 
@@ -103,7 +123,9 @@ function Filters({ data, onFilterChange }: FiltersProps) {
 
         <Collapse in={opened}>
           <Stack gap="md">
-            <Text size="sm" fw={500} c="dimmed">Date Range</Text>
+            <Text size="sm" fw={500} c="dimmed">
+              Date Range
+            </Text>
             <Stack gap="xs">
               <DatePickerInput
                 label="From Date"
@@ -125,7 +147,9 @@ function Filters({ data, onFilterChange }: FiltersProps) {
               />
             </Stack>
 
-            <Text size="sm" fw={500} c="dimmed" mt="xs">Distance (km)</Text>
+            <Text size="sm" fw={500} c="dimmed" mt="xs">
+              Distance (km)
+            </Text>
             <Stack gap="xs">
               <NumberInput
                 label="Min Distance"
@@ -147,7 +171,9 @@ function Filters({ data, onFilterChange }: FiltersProps) {
               />
             </Stack>
 
-            <Text size="sm" fw={500} c="dimmed" mt="xs">Efficiency (kWh/100km)</Text>
+            <Text size="sm" fw={500} c="dimmed" mt="xs">
+              Efficiency (kWh/100km)
+            </Text>
             <Stack gap="xs">
               <NumberInput
                 label="Min Efficiency"
@@ -171,7 +197,9 @@ function Filters({ data, onFilterChange }: FiltersProps) {
               />
             </Stack>
 
-            <Text size="sm" fw={500} c="dimmed" mt="xs">Battery SOC Drop (%)</Text>
+            <Text size="sm" fw={500} c="dimmed" mt="xs">
+              Battery SOC Drop (%)
+            </Text>
             <Stack gap="xs">
               <NumberInput
                 label="Min SOC Drop"
@@ -195,21 +223,25 @@ function Filters({ data, onFilterChange }: FiltersProps) {
 
             {categories.length > 0 && (
               <>
-                <Text size="sm" fw={500} c="dimmed" mt="xs">Category</Text>
-                  <Select
-                    label="Trip Category"
-                    placeholder="Select category"
-                    data={categoryOptions}
-                    value={filters.category}
-                    onChange={(value) => handleFilterChange('category', value)}
-                    clearable
-                    searchable
-                    checkIconPosition="right"
-                  />
+                <Text size="sm" fw={500} c="dimmed" mt="xs">
+                  Category
+                </Text>
+                <Select
+                  label="Trip Category"
+                  placeholder="Select category"
+                  data={categoryOptions}
+                  value={filters.category}
+                  onChange={(value) => handleFilterChange('category', value)}
+                  clearable
+                  searchable
+                  checkIconPosition="right"
+                />
               </>
             )}
 
-            <Text size="sm" fw={500} c="dimmed" mt="xs">Tags</Text>
+            <Text size="sm" fw={500} c="dimmed" mt="xs">
+              Tags
+            </Text>
             <MultiSelect
               label="Filter by Tags"
               placeholder="Select tags to filter"
